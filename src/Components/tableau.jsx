@@ -1,43 +1,46 @@
 import React from 'react';
 import ElementTableau from './elementTableau';
 
-const Table = ({tabParents, tabEnfants1, tabEnfants2=[], number=2}) => {
+const Table = ({tabParents, tabEnfants1 = [], tabEnfants2=[], numberParent=1, numberEnfant=1}) => {
     return ( 
         <>
-            <table className="table-responsive">
+            <table>
                 <tbody>
                     <tr>
                         {
-                            tabParents.map((name) =>
+                            tabParents.map((person) =>
                             
                                 <ElementTableau
-                                    key={name.firstName}
-                                    lienImage={name.pictureName}
-                                    prenomNom={name.firstName + " " + name.lastName}
-                                    dateDeNaissance= {name.birthDateText}
-                                    number="2"
+                                    key={person.firstName}
+                                    lienImage={person.pictureName}
+                                    prenomNom={person.firstName + " " + person.lastName}
+                                    dateDeNaissance= {person.birthDateText}
+                                    number={numberParent}
                                 />
                         )}
                     </tr>
                     <tr>
                         {
-                            tabEnfants1.map((name) =>
+                            tabEnfants1.map((person) =>
                                 <ElementTableau
-                                    key={name.firstName}
-                                    lienImage={name.pictureName}
-                                    prenomNom={name.firstName + " " + name.lastName}
-                                    dateDeNaissance= {name.birthDateText}
+                                    key={person.firstName}
+                                    lienImage={person.pictureName}
+                                    prenomNom={person.firstName + " " + person.lastName}
+                                    dateDeNaissance= {person.birthDateText}
+                                    link={person.link}
+                                    number={numberEnfant}
                                 />
                         )}
                     </tr>
                     <tr>
                         {
-                            tabEnfants2.map((name) =>
+                            tabEnfants2.map((person) =>
                                 <ElementTableau
-                                    key={name.firstName}
-                                    lienImage={name.pictureName}
-                                    prenomNom={name.firstName + " " + name.lastName}
-                                    dateDeNaissance= {name.birthDateText}
+                                    key={person.firstName}
+                                    lienImage={person.pictureName}
+                                    prenomNom={person.firstName + " " + person.lastName}
+                                    dateDeNaissance= {person.birthDateText}
+                                    link={person.link}
                                 />
                         )}
                     </tr>
