@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from '../Components/tableau'
+import AllTable from '../Components/AllTables'
 
 const tabParents = [
     {"creationDate":"21-12-20", "generation":3, "famillyName":"de Mahieu - henry de frahan", "lastName":"De Mahieu", "firstName":"Francois", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FFB_IMG_1608557548047.jpg?alt=media&token=a27eae8c-e2df-4d0e-8ae9-f002ca6e41c5", "birthDateText":"20/03/1994", "deathDateText":""},
@@ -15,7 +15,7 @@ const tabEnfants1 = [
 const Family = () => {
     return ( 
         <>
-            <Table 
+            <AllTable 
                 tabParents={tabParents}
                 tabEnfants1={tabEnfants1}
                 numberEnfant="2"

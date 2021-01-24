@@ -1,7 +1,7 @@
 import React from 'react';
 import ElementTableauGSM from './elementTableauGSM';
 
-const TableGSM = ({tabParents, tabEnfants1 = [], tabEnfants2=[], numberParent=1, numberEnfant=1}) => {
+const TableGSM = ({tabParents=[], tabEnfants1 = [], tabEnfants2=[], numberParent=1, numberEnfant=1}) => {
     return ( 
         <>
             <table>

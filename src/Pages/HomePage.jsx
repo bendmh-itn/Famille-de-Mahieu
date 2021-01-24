@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom';
 const HomePage = () => {
     return ( 
         <>
-            Voici les générations completes pour l'instant : 
+            <p>Voici les générations complètes pour l'instant</p>
             <ol>
-                <NavLink to="/deMahieu-deVinck"><li>Famille de Mahieu - de Vinck</li></NavLink>
-                <NavLink to="/Rolin - de Mahieu"><li>Famille Rolin - de Mahieu</li></NavLink>
+                <li><NavLink to="/deMahieu-deVinck">Famille de Mahieu - de Vinck</NavLink></li>
+                <li><NavLink to="/Rolin - de Mahieu">Famille Rolin - de Mahieu</NavLink></li>
+                <li><NavLink to="/de Mahieu - Vandermeersch">Famille de Mahieu - Vandermeersch</NavLink></li>
+                <li><NavLink to="/van Delft - de Mahieu">Famille van Delft - de Mahieu</NavLink></li>
             </ol>
         </>
      );

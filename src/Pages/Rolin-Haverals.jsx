@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from '../Components/tableau'
+import AllTable from '../Components/AllTables'
 
 const tabParents = [
     {
@@ -69,7 +69,7 @@ const tabEnfants1 = [
 const Family = () => {
     return ( 
         <>
-            <Table 
+            <AllTable 
                 tabParents={tabParents}
                 tabEnfants1={tabEnfants1}
                 numberParent="2"
