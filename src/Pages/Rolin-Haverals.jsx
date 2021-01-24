@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AllTable from '../Components/AllTables'
 
 const tabParents = [
@@ -67,6 +67,9 @@ const tabEnfants1 = [
 ]
 
 const Family = () => {
+	useEffect(() => {
+        window.scroll(0, 0);
+    }, []);
     return ( 
         <>
             <AllTable 
