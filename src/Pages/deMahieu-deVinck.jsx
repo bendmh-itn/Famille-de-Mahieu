@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from '../Components/tableau'
+import TableGSM from '../Components/TableGSM';
 
 const tabParents = [
     {"creationDate":"21-12-20", "generation":2, "famillyName":"de Mahieu-de Vinck", "lastName":"de Mahieu ", "firstName":"Patrick", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2F20201221_154411.jpg?alt=media&token=f0f4c5f8-1c1b-4c63-bcfe-176718134250", "birthDateText":"15/07/1960", "deathDateText":""},
@@ -24,12 +25,22 @@ const tabEnfants2 = [
 const Family = () => {
     return ( 
         <>
+            <div className="d-none d-sm-none d-md-block">
             <Table 
                 tabParents={tabParents}
                 tabEnfants1={tabEnfants1}
                 tabEnfants2={tabEnfants2}
                 numberParent="2"
             />
+            </div>
+            <div className="d-block d-sm-block d-md-none">
+                <TableGSM 
+                    tabParents={tabParents}
+                    tabEnfants1={tabEnfants1}
+                    tabEnfants2={tabEnfants2}
+                    numberParent="2"
+                />
+            </div>
         </>
      );
 }
