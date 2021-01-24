@@ -10,6 +10,7 @@ const HomePage = () => {
                 <li><NavLink to="/Rolin - de Mahieu">Famille Rolin - de Mahieu</NavLink></li>
                 <li><NavLink to="/de Mahieu - Vandermeersch">Famille de Mahieu - Vandermeersch</NavLink></li>
                 <li><NavLink to="/van Delft - de Mahieu">Famille van Delft - de Mahieu</NavLink></li>
+                <li><a href="https://drive.google.com/file/d/1fkrakwIsvxVnX5PhBokSStJmdF3xSmAG/view?usp=sharing">Voir toutes les photos</a></li>
             </ol>
         </>
      );
