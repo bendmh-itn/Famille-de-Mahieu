@@ -11,7 +11,6 @@ const TableGSM = ({tabParents=[], tabEnfants1 = [], tabEnfants2=[], numberParent
                             
                                 <ElementTableauGSM
                                     key={person.firstName}
-                                    person={person}
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}

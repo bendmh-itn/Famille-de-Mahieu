@@ -15,6 +15,7 @@ const Table = ({tabParents, tabEnfants1 = [], tabEnfants2=[], numberParent=1, nu
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
+                                    dateDeces={person.deathDateText}
                                     number={numberParent}
                                 />
                         )}
@@ -27,7 +28,7 @@ const Table = ({tabParents, tabEnfants1 = [], tabEnfants2=[], numberParent=1, nu
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
-                                    link={person.link}
+                                    link={person.famillyName}
                                     number={numberEnfant}
                                 />
                         )}
@@ -40,7 +41,7 @@ const Table = ({tabParents, tabEnfants1 = [], tabEnfants2=[], numberParent=1, nu
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
-                                    link={person.link}
+                                    link={person.famillyName}
                                 />
                         )}
                     </tr>

@@ -60,7 +60,7 @@ const Family = () => {
             <AllTable 
                 tabParents={tabParents}
                 tabEnfants1={tabEnfants1}
-                numberParent="2"
+                numberParent="1"
             />
         </>
      );

@@ -30,7 +30,7 @@ const tabEnfants1 = [
     {
 		"creationDate" : "30-01-21",
 		"generation" : 3,
-		"famillyName" : "Legast- de Mahieu",
+		"famillyName" : "Legast - de Mahieu",
 		"lastName" : "Legast",
 		"firstName" : "Galien",
 		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FIMG-20200804-WA0010%20(2).jpg?alt=media&token=dd21169c-d3da-43ac-9c9d-d5387c812b0e",

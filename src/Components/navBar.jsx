@@ -9,7 +9,7 @@ const NavBar = () => {
                     <NavLink className="navbar-brand" to="/">
                         Famille de Mahieu
                     </NavLink>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {/*<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -18,7 +18,7 @@ const NavBar = () => {
                             <NavLink className="nav-link active" aria-current="page" to="/generation 4">Génération 4</NavLink>
                         </li>
                     </ul>
-                    </div>
+    </div>*/}
                 </div>
             </nav>
         </>
