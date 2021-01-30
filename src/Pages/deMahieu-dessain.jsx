@@ -70,7 +70,7 @@ const tabEnfants2 = [
 		"lastName" : "de Mahieu",
 		"firstName" : "Miguel",
 		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2F03FF113D-BFB5-4AAA-BD93-1487B07879D6.jpeg?alt=media&token=20e44670-8291-459c-9a62-7507c7ce9f15",
-		"birthDateText" : "14/07/1960",
+		"birthDateText" : "15/07/1960",
 		"deathDateText" : "",
 		"MyNumber" : 6
 	},

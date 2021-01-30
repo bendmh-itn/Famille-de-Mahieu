@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AllTable from '../Components/AllTables'
 
 const tabParents = [
-    {"creationDate":"27-12-20", "generation":2, "famillyName":"de Mahieu - Vandermeersch", "lastName":"de Mahieu", "firstName":"Miguel", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2F03FF113D-BFB5-4AAA-BD93-1487B07879D6.jpeg?alt=media&token=20e44670-8291-459c-9a62-7507c7ce9f15", "birthDateText":"14/07/1960", "deathDateText":""},
+    {"creationDate":"27-12-20", "generation":2, "famillyName":"de Mahieu - Vandermeersch", "lastName":"de Mahieu", "firstName":"Miguel", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2F03FF113D-BFB5-4AAA-BD93-1487B07879D6.jpeg?alt=media&token=20e44670-8291-459c-9a62-7507c7ce9f15", "birthDateText":"15/07/1960", "deathDateText":""},
     {"creationDate":"23-12-20", "generation":2, "famillyName":"de Mahieu - Vandermeersch", "lastName":"de Mahieu - Vandermeersch ", "firstName":"Brigitte ", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FFCC71762-3409-4EEB-A852-8709B9DB8A5C.jpeg?alt=media&token=d535d8ef-8390-4630-806c-acb86102cd47", "birthDateText":"31/12/1965", "deathDateText":""},
  ]
 
