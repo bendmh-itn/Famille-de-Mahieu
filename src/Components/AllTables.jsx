@@ -6,7 +6,8 @@ import TableGSM from './TableGSM'
 const AllTable = ({tabParents, tabEnfants1 = [], tabEnfants2= [], numberParent=1, numberEnfant=1}) => {
     return ( 
         <>
-            <div className="d-none d-sm-none d-md-block">
+            <h1>{tabParents[0].famillyName}</h1>
+            {<div className="d-none d-sm-none d-md-block">
                 <TableOrdi 
                     tabParents={tabParents}
                     tabEnfants1={tabEnfants1}
@@ -14,7 +15,7 @@ const AllTable = ({tabParents, tabEnfants1 = [], tabEnfants2= [], numberParent=1
                     numberParent={numberParent}
                     numberEnfant={numberEnfant}
                 />
-            </div>
+            </div>}
             <div className="d-block d-sm-block d-md-none">
                 <TableGSM 
                     tabParents={tabParents}

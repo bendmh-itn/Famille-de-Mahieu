@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import AllTable from '../Components/AllTables'
 
 const tabParents = [
-    {"creationDate":"27-12-20", "generation":2, "famillyName":" van Delft  de Mahieu ", "lastName":"de Mahieu", "firstName":"Sabine", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FSabine.jpg?alt=media&token=4d1156a2-1b2e-46a2-b547-fccd115b2b4d", "birthDateText":"07/03/1956", "deathDateText":""},
-    {"creationDate":"27-12-20", "generation":2, "famillyName":" van Delft  de Mahieu ", "lastName":"van DELFT", "firstName":"Baudouin", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fc021616d-9fd3-486c-8f73-72fd11cef5ff.JPG?alt=media&token=b2ec24ed-ec0a-4738-b6e1-5c83b51e4e1b", "birthDateText":"12/03/1956", "deathDateText":""},
+    {"creationDate":"27-12-20", "generation":2, "famillyName":" van Delft - de Mahieu ", "lastName":"de Mahieu", "firstName":"Sabine", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FSabine.jpg?alt=media&token=4d1156a2-1b2e-46a2-b547-fccd115b2b4d", "birthDateText":"07/03/1956", "deathDateText":""},
+    {"creationDate":"27-12-20", "generation":2, "famillyName":" van Delft - de Mahieu ", "lastName":"van DELFT", "firstName":"Baudouin", "pictureName":"https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fc021616d-9fd3-486c-8f73-72fd11cef5ff.JPG?alt=media&token=b2ec24ed-ec0a-4738-b6e1-5c83b51e4e1b", "birthDateText":"12/03/1956", "deathDateText":""},
  ]
 
 const tabEnfants1 = [

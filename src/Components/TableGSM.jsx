@@ -11,9 +11,11 @@ const TableGSM = ({tabParents=[], tabEnfants1 = [], tabEnfants2=[], numberParent
                             
                                 <ElementTableauGSM
                                     key={person.firstName}
+                                    person={person}
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
+                                    dateDeces={person.deathDateText}
                                     number={numberParent}
                                 />
                         )}
@@ -24,7 +26,7 @@ const TableGSM = ({tabParents=[], tabEnfants1 = [], tabEnfants2=[], numberParent
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
-                                    link={person.link}
+                                    link={person.famillyName}
                                     number={numberEnfant}
                                 />
                         )}
@@ -35,7 +37,7 @@ const TableGSM = ({tabParents=[], tabEnfants1 = [], tabEnfants2=[], numberParent
                                     lienImage={person.pictureName}
                                     prenomNom={person.firstName + " " + person.lastName}
                                     dateDeNaissance= {person.birthDateText}
-                                    link={person.link}
+                                    link={person.famillyName}
                                 />
                         )}
                 </tbody>
