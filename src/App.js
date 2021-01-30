@@ -54,7 +54,7 @@ function App() {
                {/*Famille de Bernard de Fauconval - de Mahieu */}
               <Route path="/de Bernard de Fauconval - de Mahieu" component={DidierDeFauconval} />
               <Route path="/de Fauconval-Leblicq " component={GauthierDeFauconval} />
-              <Route path="/Blave-deFauconval" component={GeraldineDeFauconval} />
+              <Route path="/Blave - de Fauconval " component={GeraldineDeFauconval} />
               <Route path="/de Fauconval - Leonardo" component={StephanieDeFauconval} />
 
 
