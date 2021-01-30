@@ -68,7 +68,7 @@ function App() {
               {/*Famille Patrick de Mahieu */}
               <Route path="/de Mahieu - Doat" component={JBdeMahieu} />
               <Route path="/de Mahieu - henry de frahan" component={FrancoisdeMahieu} />
-              <Route path="/de Mahieu - Aerts" component={ASdeMahieu} />
+              {/*<Route path="/de Mahieu - Aerts" component={ASdeMahieu} />*/}
               <Route path="/de Mahieu - D'herde" component={BenoitdeMahieu} />
               <Route path="/de Mahieu-Tock" component={PierredeMahieu} />
               <Route path="/de Mahieu-de Vinck" component={PatrickdeMahieu} />
