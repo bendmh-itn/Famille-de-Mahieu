@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import AllTable from '../Components/AllTables'
+import firebase from "firebase";
 
 const tabParents = [
     {
@@ -8,7 +9,7 @@ const tabParents = [
 		"famillyName" : "de Mahieu - Dessain",
 		"lastName" : "Dessain",
 		"firstName" : "Marie-Antoinette",
-		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fbonne%20maman.jpg?alt=media&token=3ff3d2c2-6989-40b7-8aea-95a91a28e630",
+		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FIMG-20210131-WA0000.jpg?alt=media&token=4b458a1e-035b-4033-b946-b531ef9c238c",
 		"birthDateText" : "27/05/1924",
 		"deathDateText" : "-08/12/2020",
 		"MyNumber" : 0
@@ -59,6 +60,17 @@ const tabEnfants1 = [
 		"birthDateText" : "19/03/1957",
 		"deathDateText" : "",
 		"MyNumber" : 3
+	},
+	{
+		"creationDate" : "27-12-20",
+		"generation" : 2,
+		"famillyName" : "de Mahieu - van Havre",
+		"lastName" : "de Mahieu",
+		"firstName" : "Cédric",
+		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FIMG_0033.jpeg?alt=media&token=2e169a7c-6468-4ec2-a026-7ee30e8f40bb",
+		"birthDateText" : "08/03/1958",
+		"deathDateText" : "",
+		"MyNumber" : 4
 	},    
 ]
 
@@ -95,11 +107,39 @@ const tabEnfants2 = [
 		"birthDateText" : "29/11/1961",
 		"deathDateText" : "",
 		"MyNumber" : 8
+	},
+	{
+		"creationDate" : "30-01-21",
+		"generation" : 2,
+		"famillyName" : "de Mahieu - Dessain",
+		"lastName" : "de Mahieu",
+		"firstName" : "Patricia",
+		"pictureName" : "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2FIMG-20210131-WA0001.jpg?alt=media&token=fcb6a39d-d2d7-474e-b759-f98aa0b60fb3",
+		"birthDateText" : "03/07/1965",
+		"deathDateText" : "",
+		"MyNumber" : 9
     },
 ]
 
+const firebaseApp = firebase.initializeApp({
+    apiKey: "AIzaSyB3JOdtAfXGRs5ob9KztShnK3OCY-m4oiU",
+    authDomain: "demahieu-file.firebaseapp.com",
+    projectId: "demahieu-file",
+    storageBucket: "demahieu-file.appspot.com",
+    messagingSenderId: "192092843689",
+    appId: "1:192092843689:web:d490269a5a93671c3483b8"
+  });
+
+
 const Family = () => {
     useEffect(() => {
+		const db = firebaseApp.firestore();
+		db.collection("famille")
+		.get()
+		.then(querySnapshot => {
+		const data = querySnapshot.docs.map(doc => doc.data());
+		console.log(data); // array of cities objects
+		});
         window.scroll(0, 0);
     }, []);
     return ( 
