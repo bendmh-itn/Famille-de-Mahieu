@@ -26,6 +26,8 @@ import GeraldineDeFauconval from './Pages/Blave-deFauconval'
 import StephanieDeFauconval from './Pages/deFauconval-Leonardo'
 import CarineDeMahieu from './Pages/Legast-deMahieu'
 import generation4 from './Pages/generation4'
+import LouisdeMahieu from "./Pages/deMahieu-Godin"
+import CedricdeMahieu from "./Pages/deMahieu-vanHavre";
 
 function App() {
   return (
@@ -72,6 +74,13 @@ function App() {
               <Route path="/de Mahieu - D'herde" component={BenoitdeMahieu} />
               <Route path="/de Mahieu-Tock" component={PierredeMahieu} />
               <Route path="/de Mahieu-de Vinck" component={PatrickdeMahieu} />
+
+
+              {/*Famille Louis de Mahieu */}
+              <Route path="/de Mahieu - Godin" component={LouisdeMahieu} />
+
+              {/*Famille Cédric de Mahieu */}
+              <Route path="/de Mahieu - van Havre" component={CedricdeMahieu} />
 
 
               <Route path="/generation 4" component={generation4} />

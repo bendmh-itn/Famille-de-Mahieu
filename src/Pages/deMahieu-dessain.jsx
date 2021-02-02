@@ -75,6 +75,17 @@ const tabEnfants1 = [
 ]
 
 const tabEnfants2 = [
+	{
+        "creationDate": "02-02-21",
+        "generation": 2,
+        "famillyName": "de Mahieu - Godin",
+        "lastName": "de Mahieu",
+        "firstName": "Louis",
+        "pictureName": "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2F20210131_215535.jpg?alt=media&token=0e5c113d-dc1b-420a-93a6-1ff753823463",
+        "birthDateText": "27/07/1959",
+        "deathDateText": "",
+        "MyNumber": 5
+    },
     {
 		"creationDate" : "27-12-20",
 		"generation" : 2,
@@ -133,13 +144,13 @@ const firebaseApp = firebase.initializeApp({
 
 const Family = () => {
     useEffect(() => {
-		const db = firebaseApp.firestore();
+		/*const db = firebaseApp.firestore();
 		db.collection("famille")
 		.get()
 		.then(querySnapshot => {
 		const data = querySnapshot.docs.map(doc => doc.data());
-		console.log(data); // array of cities objects
-		});
+		console.log(data); // array of familly objects
+		});*/
         window.scroll(0, 0);
     }, []);
     return ( 
