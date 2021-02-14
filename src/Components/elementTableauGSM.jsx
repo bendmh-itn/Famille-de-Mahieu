@@ -1,15 +1,19 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const ElementTableau = ({lienImage, prenomNom, dateDeNaissance, number=1, link="#", dateDeces}) => {
+const ElementTableau = ({lienImage, prenomNom, dateDeNaissance, link="#", dateDeces}) => {
     return ( 
         <>
             <tr>
-                <td colSpan={number}>
+                <td>
                     <NavLink className="navbar-brand" to={link}><img src={lienImage} alt={prenomNom} /></NavLink>
                     <div>
                         <h5>{prenomNom}</h5>
-                        <h6>{dateDeNaissance}{dateDeces}</h6>
+                        <h6>{dateDeNaissance} 
+                        {dateDeces &&
+                            <span> - {dateDeces}</span> 
+                        }
+                        </h6>
                     </div>
                 </td>
             </tr>

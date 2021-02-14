@@ -49,3 +49,9 @@ table {
 		height: 100%;
 	}
 }
+
+.buttonConnexion {
+	color : white;
+	background-color: #11ffee00;
+	border : 0 solid black;
+}

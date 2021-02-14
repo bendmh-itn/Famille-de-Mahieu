@@ -1,6 +1,9 @@
 import firebase from "firebase";
+import "firebase/auth";
+import "firebase/firestore";
 
-const firebaseApp = firebase.initializeApp({
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyB3JOdtAfXGRs5ob9KztShnK3OCY-m4oiU",
     authDomain: "demahieu-file.firebaseapp.com",
     projectId: "demahieu-file",
@@ -9,6 +12,19 @@ const firebaseApp = firebase.initializeApp({
     appId: "1:192092843689:web:d490269a5a93671c3483b8"
   });
 
-  const db = firebaseApp.firestore();
+export const db = firebaseApp.firestore();
 
-export default { db };
+function findAll(){
+  return db.collection("famille")
+		.orderBy("numberFamilly", "asc")
+		.get()
+}
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+export const signInWithGoogle = () => {
+    auth.signInWithPopup(provider);
+};
+export default{
+  findAll
+};
