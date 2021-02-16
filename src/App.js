@@ -2,7 +2,6 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import './App.css';
 import NavBar from './Components/navBar';
 import UserProvider from './Components/Providers/UserProvider';
-import SignIn from './Components/SignIn';
 import HomePage from './Pages/deMahieu-dessain';
 
 function App() {

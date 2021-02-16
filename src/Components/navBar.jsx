@@ -7,7 +7,7 @@ const NavBar = () => {
         <>
             <nav id="MyModification" className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                    <NavLink className="navbar-brand" to="/">
+                    <NavLink className="navbar-brand" to="/" replace >
                         Famille de Mahieu
                     </NavLink>
                     <button
