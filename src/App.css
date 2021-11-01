@@ -1,70 +1,74 @@
-
-th, td {
-	height : 250px;
-	text-align : center;
-	padding : 10px
+th,
+td {
+  height: 250px;
+  text-align: center;
+  padding: 10px;
 }
 
 table {
-	width : 90%;
-	margin : 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }
 
 h1 {
-	text-align: center;
-	margin-bottom: 1em;
-	margin-top: 1em;
+  text-align: center;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 body {
-	background-color: bisque;
-	width:100%;
+  background-color: bisque;
+  width: 100%;
 }
 
 main {
-	padding: 20px;
-	margin-top: 40px;
+  padding: 20px;
+  margin-top: 40px;
 }
 
-.navbar{
-	background-color: darkgoldenrod;
+.navbar {
+  background-color: darkgoldenrod;
 }
 
 table {
-	width: 100%
+  width: 100%;
 }
 
-#MyModification{
-	position: fixed;
-	width: 100%;
-	margin-top: -2.5em;
+#MyModification {
+  position: fixed;
+  width: 100%;
+  margin-top: -2.5em;
 }
-
 
 /*Mettre les images selon la taille de l'écran */
 @media screen and (min-width: 10px) and (max-width: 750px) {
-	img {
-		width: 80%;
-	}
+  img {
+    width: 80%;
+  }
 }
 @media screen and (min-width: 751px) and (max-width: 40000px) {
-	img {
-		height: 300px;
-	}
+  img {
+    height: 300px;
+  }
 }
 
 .buttonConnexion {
-	color : white;
-	background-color: #11ffee00;
-	border : 0 solid black;
+  color: white;
+  background-color: #11ffee00;
+  border: 0 solid black;
 }
 
 .containerFlexible {
-	display : flex;
-	flex-wrap : wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .elementFlexible {
-	text-align: center;
-	flex-grow: 1;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.myButton {
+  background-color: Transparent;
+  border: none;
 }

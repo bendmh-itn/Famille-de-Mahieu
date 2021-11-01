@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import { signInWithGoogle } from "../firebase";
+import Firebase from "../firebase";
 
 const NavBar = () => {
     return ( 
@@ -11,7 +11,7 @@ const NavBar = () => {
                         Famille de Mahieu
                     </NavLink>
                     <button
-                        className="buttonConnexion" onClick = {() => {signInWithGoogle()}}>
+                        className="buttonConnexion" onClick = {() => {Firebase.signInWithGoogle()}}>
                         Connexion
                     </button>
                 </div>
