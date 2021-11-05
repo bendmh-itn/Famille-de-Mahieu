@@ -10,6 +10,9 @@ const NavBar = () => {
                     <NavLink className="navbar-brand" to="/" replace >
                         Famille de Mahieu
                     </NavLink>
+                    <NavLink className="navbar-brand" to="/anniversaire" >
+                        Annif
+                    </NavLink>
                     <button
                         className="buttonConnexion" onClick = {() => {Firebase.signInWithGoogle()}}>
                         Connexion
