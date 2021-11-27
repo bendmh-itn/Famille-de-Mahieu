@@ -36,9 +36,16 @@ export const DataInOptions = () => {
 };
 
 function trieArray(a, b) {
-  if (a.birthDate !== b.birthDate) {
-    return a.birthDate > b.birthDate ? 1 : -1;
+  let anneeA = a.birthDate.split("/")[2];
+  let anneeB = b.birthDate.split("/")[2];
+  let moisA = a.birthDate.split("/")[1];
+  let moisB = b.birthDate.split("/")[1];
+  if (anneeA !== anneeB) {
+    return anneeA > anneeB ? 1 : -1;
   }
+  /*if (moisA !== moisB) {
+    return moisA > moisB ? 1 : -1;
+  }*/
   return 0;
 }
 
@@ -47,6 +54,17 @@ export const MoisPersons = () => {
   const now = new Date();
   allData.forEach((element) => {
     if (element.birthDate.split("/")[1] === (now.getMonth() + 1).toString()) {
+      data.push(element);
+    }
+  });
+  data.sort(trieArray);
+  return data;
+};
+
+export const FilterByGeneration = (e) => {
+  let data = [];
+  allData.forEach((element) => {
+    if (element.generation === e) {
       data.push(element);
     }
   });

@@ -3,6 +3,7 @@ import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import fireBase from '../firebase';
 import { MyFilter, DataInOptions, copyData } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectPerson';
+import {ACTUAL_GENERATION} from "../constant"
 
 
 const Family = ({match}) => {
@@ -64,8 +65,8 @@ const Family = ({match}) => {
 						prenomNom={person.firstName + " " + person.lastName}
 						dateDeNaissance= {person.birthDate}
 						dateDeces={person.deathDate}
-						link={person.generation === "4" || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
-						generation={person.generation}  
+						link="#"
+						generation={person.generation}
 					/>
 					}
 				
@@ -82,7 +83,7 @@ const Family = ({match}) => {
 						prenomNom={person.firstName + " " + person.lastName}
 						dateDeNaissance= {person.birthDate}
 						dateDeces={person.deathDate}
-						link={person.generation === "4" || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
+						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
 						generation={person.generation}   
 					/>
 				}

@@ -38,6 +38,8 @@ table {
   position: fixed;
   width: 100%;
   margin-top: -2.5em;
+  z-index: 7;
+  padding-left: 10px;
 }
 
 /*Mettre les images selon la taille de l'écran */
@@ -56,6 +58,7 @@ table {
   color: white;
   background-color: #11ffee00;
   border: 0 solid black;
+  padding: 5px 0;
 }
 
 .containerFlexible {

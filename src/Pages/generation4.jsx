@@ -1,38 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
-import { MoisPersons } from '../Functions/FilterData';
+import { FilterByGeneration } from '../Functions/FilterData';
 import {ACTUAL_GENERATION} from "../constant"
 
 
-const Anniversaire = () => {
+const Generation4 = () => {
 	const [famillyFiltred, setFamillyFiltred] = useState([]);
-    const [month, setMonth] = useState("");
 	
     useEffect(() => {
-        const months = [
-            'janvier',
-            'février',
-            'mars',
-            'avril',
-            'mai',
-            'juin',
-            'juillet',
-            'aout',
-            'septembre',
-            'octobre',
-            'novembre',
-            'décembre'
-          ]
-		let data = MoisPersons();
-        let now = new Date();
-        setMonth(months[now.getMonth()]);
+        let data = FilterByGeneration("4");
         setFamillyFiltred(data);
     }, []);
 
     return ( 
         <>
             <div className="container">
-			    <h2 className="text-center">Anniversaire de {month}</h2>
+			    <h2 className="text-uppercase text-center">La quatrième génération</h2>
+                <p>Nous sommes {famillyFiltred.length} personnes</p>
             </div>
 			<div className="containerFlexible">
 			{
@@ -55,4 +39,4 @@ const Anniversaire = () => {
      );
 }
  
-export default Anniversaire;
+export default Generation4;

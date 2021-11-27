@@ -7,10 +7,10 @@ const TrombinoscopeFlex = ({lienImage, prenomNom, dateDeNaissance, link="#", dat
     return ( 
         <>
             <div className="elementFlexible">
-                {link !== "#" &&
+                {link !== "#" && 
                     <button className="myButton" onClick={() => history.push(link)}><img src={lienImage} alt={prenomNom} /></button>
                 }
-                {(generation === "4" || generation === "1") && 
+                {link === "#" && 
                     <img src={lienImage} alt={prenomNom} />
                 }
                 <div>
