@@ -40,12 +40,24 @@ function trieArray(a, b) {
   let anneeB = b.birthDate.split("/")[2];
   let moisA = a.birthDate.split("/")[1];
   let moisB = b.birthDate.split("/")[1];
+  let jourA = a.birthDate.split("/")[0];
+  let jourB = b.birthDate.split("/")[0];
   if (anneeA !== anneeB) {
     return anneeA > anneeB ? 1 : -1;
   }
-  /*if (moisA !== moisB) {
+  if (moisA !== moisB) {
     return moisA > moisB ? 1 : -1;
-  }*/
+  }
+  if (jourA !== jourB) {
+    return jourA > jourB ? 1 : -1;
+  }
+  return 0;
+}
+
+function trieArrayByBirthdate(a, b) {
+  if (a.birthDate !== b.birthDate) {
+    return a.birthDate > b.birthDate ? 1 : -1;
+  }
   return 0;
 }
 
@@ -57,7 +69,7 @@ export const MoisPersons = () => {
       data.push(element);
     }
   });
-  data.sort(trieArray);
+  data.sort(trieArrayByBirthdate);
   return data;
 };
 

@@ -15,8 +15,8 @@ const Generation3 = () => {
     return ( 
         <>
             <div className="container">
-			    <h1 className="text-uppercase text-center">La troisième génération</h1>
-                <p>Nous sommes {famillyFiltred.length} personnes</p>
+			    <h1 className="text-uppercase text-center">La 3<sup className="text-lowercase">ème</sup> génération</h1>
+                <h3 className="mb-4">Nous sommes {famillyFiltred.length} personnes</h3>
             </div>
 			<div className="containerFlexible">
 			{
