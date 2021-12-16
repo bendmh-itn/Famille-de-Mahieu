@@ -7,6 +7,7 @@ import {ACTUAL_GENERATION} from "../constant"
 const Anniversaire = () => {
 	const [famillyFiltred, setFamillyFiltred] = useState([]);
     const [month, setMonth] = useState("");
+    const [day, setDay] = useState("");
 	
     useEffect(() => {
         const months = [
@@ -26,6 +27,7 @@ const Anniversaire = () => {
 		let data = MoisPersons();
         let now = new Date();
         setMonth(months[now.getMonth()]);
+        setDay(now.getDate());
         setFamillyFiltred(data);
     }, []);
 
@@ -45,7 +47,8 @@ const Anniversaire = () => {
 						dateDeNaissance= {person.birthDate}
 						dateDeces={person.deathDate}
 						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
-						generation={person.generation}  
+						generation={person.generation}
+                        myBirthday={person.birthDate.split("/")[0] === day.toString() ? true : false}
 					/>
 					}
 				

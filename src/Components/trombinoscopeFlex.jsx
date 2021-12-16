@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import '../App.css';
 
-const TrombinoscopeFlex = ({lienImage, prenomNom, dateDeNaissance, link="#", dateDeces, generation}) => {
+const TrombinoscopeFlex = ({lienImage, prenomNom, dateDeNaissance, link="#", dateDeces, generation, myBirthday = false}) => {
     const history = useHistory();
     return ( 
         <>
@@ -21,6 +21,7 @@ const TrombinoscopeFlex = ({lienImage, prenomNom, dateDeNaissance, link="#", dat
                     }
                     </h6>
                 </div>
+                {myBirthday && <h2 className="clignote">Happy birthday</h2>}
             </div>   
         </>
      );

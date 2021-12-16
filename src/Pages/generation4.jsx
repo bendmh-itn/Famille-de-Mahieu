@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { FilterByGeneration } from '../Functions/FilterData';
-import {ACTUAL_GENERATION} from "../constant"
 
 
 const Generation4 = () => {
@@ -28,7 +27,7 @@ const Generation4 = () => {
 						prenomNom={person.firstName + " " + person.lastName}
 						dateDeNaissance= {person.birthDate}
 						dateDeces={person.deathDate}
-						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
+						link={"/3/" + Math.round(person.numberFamilly/10) }
 						generation={person.generation}  
 					/>
 					}
