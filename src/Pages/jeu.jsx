@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ChooseOnePeople } from '../Functions/FilterData';
 
 const Jeu = () => {
+
+    const maximum = 20;
     const [person, setPerson] = useState([]);
     const [personSelected, setPersonSelected] = useState([]);
     const [score, setScore] = useState(0);
@@ -53,7 +55,7 @@ const Jeu = () => {
             {!personSelected &&
                 <h2>No data Selected. go back to the first page :'(</h2>
             }
-            {personSelected && total !== person.length &&
+            {personSelected && total !== maximum &&
                 <div className="text-center">
                     <h1 className="text-center">Quel est mon prénom ?</h1>
                     {total === 0 && <p>Désolé, pour ceux qui n'ont pas mis de photo, c'est d'office faux sauf si vous devinez au hasard</p>}
@@ -77,7 +79,7 @@ const Jeu = () => {
                     }
                 </div>
             }
-            {total === person.length &&
+            {total === maximum &&
                 <h1>Bravo tu as obtenu {score} sur {total}</h1>
             }
             
