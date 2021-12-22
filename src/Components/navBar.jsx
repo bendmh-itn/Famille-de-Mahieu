@@ -23,6 +23,9 @@ const NavBar = () => {
                         <li className="nav-item">
                             <NavLink className="navbar-brand" to="/generation4">Génération 4</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className="navbar-brand" to="/jeu">Jeu</NavLink>
+                        </li>
                     </ul>
                     <button
                         className="buttonConnexion navbar-brand text-right" onClick = {() => {Firebase.signInWithGoogle()}}>

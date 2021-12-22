@@ -11,7 +11,7 @@ const TrombinoscopeFlex = ({lienImage, prenomNom, dateDeNaissance, link="#", dat
                     <button className="myButton" onClick={() => history.push(link)}><img src={lienImage} alt={prenomNom} /></button>
                 }
                 {link === "#" && 
-                    <img src={lienImage} alt={prenomNom} />
+                    <img className='picture' src={lienImage} alt={prenomNom} />
                 }
                 <div>
                     <h5>{prenomNom}</h5>

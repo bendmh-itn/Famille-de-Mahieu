@@ -83,3 +83,25 @@ export const FilterByGeneration = (e) => {
   data.sort(trieArray);
   return data;
 };
+
+//fonction qui permet d'obtenir un nombre aléatoire entre 0 et max
+/*function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}*/
+
+export const ChooseOnePeople = () => {
+  let data = [];
+  data = randomize(allData);
+  return data;
+};
+
+function randomize(tab) {
+  var i, j, tmp;
+  for (i = tab.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    tmp = tab[i];
+    tab[i] = tab[j];
+    tab[j] = tmp;
+  }
+  return tab;
+}
