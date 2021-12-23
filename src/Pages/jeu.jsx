@@ -12,6 +12,7 @@ const Jeu = () => {
     const [indice, setIndice] = useState(false);
     const [index, setIndex] = useState(0);
     const [goodAnswer, setGoodAnswer] = useState("");
+    const [level, setLevel] = useState(0);
 
     function VerifyAnswer () {
         if(selectValue.toLowerCase() === personSelected.firstName.toLowerCase().replace(/\s+/g, '')){   
@@ -32,6 +33,12 @@ const Jeu = () => {
         setSelectValue("");
     }
 
+    function TryAgain() {
+        ChooseData();
+        setGoodAnswer("");
+        setIndex(0);
+    }
+
     function nextPerson(){
         let monIndex = index;
         setIndex(index+1);
@@ -43,11 +50,55 @@ const Jeu = () => {
         setIndice(true);
     }
 
+    function ChangeLevel(e){
+        if(level === 0){
+            setLevel(1);
+        }else{
+            setLevel(0);
+        }
+    }
+
+    function ChooseData(){
+        let data = ChooseOnePeople();
+        let dataFiltred = [];
+        if(level === 1){
+            data.forEach((element) => {
+                if (element.generation === "4") {
+                    dataFiltred.push(element);
+                }
+              });
+              setTotal(0);
+              setScore(0);
+              setPerson(dataFiltred);
+              setPersonSelected(dataFiltred[0]);
+        }else {
+            setTotal(0);
+            setScore(0);
+            setPerson(data);
+            setPersonSelected(data[0]);
+        }
+    }
+
     useEffect(() => {
         let data = ChooseOnePeople();
-        setPerson(data);
-        setPersonSelected(data[0]);
-    }, []);
+        let dataFiltred = [];
+        if(level === 1){
+            data.forEach((element) => {
+                if (element.generation === "4") {
+                    dataFiltred.push(element);
+                }
+              });
+              setTotal(0);
+              setScore(0);
+              setPerson(dataFiltred);
+              setPersonSelected(dataFiltred[0]);
+        }else {
+            setTotal(0);
+            setScore(0);
+            setPerson(data);
+            setPersonSelected(data[0]);
+        }
+    }, [level]);
 
     return(
     <>
@@ -71,6 +122,9 @@ const Jeu = () => {
                         <div className='elementFlexible'>
                             <button onClick={GiveIndice} className="btn btn-secondary mt-3">indice</button>
                         </div>
+                        <div className='elementFlexible'>
+                            <button onClick={ChangeLevel} className="btn btn-danger mt-3">{level === 0 ? "Difficile" : "Facile" }</button>
+                        </div>
                     </div>
                         
                     <h3 className='mt-3'>Votre score : {score} sur {total}</h3>
@@ -80,7 +134,10 @@ const Jeu = () => {
                 </div>
             }
             {total === maximum &&
-                <h1>Bravo tu as obtenu {score} sur {total}</h1>
+                <div>
+                    <h1>Bravo tu as obtenu {score} sur {total}</h1>
+                    <button onClick={TryAgain} className="btn btn-primary mt-3">Recommencer</button>
+                </div>
             }
             
             
