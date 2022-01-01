@@ -64,8 +64,13 @@ function trieArrayByBirthdate(a, b) {
 export const MoisPersons = () => {
   let data = [];
   const now = new Date();
+  let moisAnnee =
+    now.getMonth() + 1 < 10
+      ? "0" + (now.getMonth() + 1).toString()
+      : (now.getMonth() + 1).toString();
+  console.log(moisAnnee);
   allData.forEach((element) => {
-    if (element.birthDate.split("/")[1] === (now.getMonth() + 1).toString()) {
+    if (element.birthDate.split("/")[1] === moisAnnee) {
       data.push(element);
     }
   });
@@ -89,12 +94,13 @@ export const FilterByGeneration = (e) => {
   return Math.floor(Math.random() * max);
 }*/
 
-export const ChooseOnePeople = () => {
+export const RandomizeArray = () => {
   let data = [];
   data = randomize(allData);
   return data;
 };
 
+//Cette fonction permet de mélanger les données dans un tableau
 function randomize(tab) {
   var i, j, tmp;
   for (i = tab.length - 1; i > 0; i--) {

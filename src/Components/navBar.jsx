@@ -32,21 +32,7 @@ const NavBar = () => {
                         Connexion
                     </button>
                 </div>
-    </nav>
-            {/*<nav className="navbar navbar-expand-lg navbar-dark">
-                <div className="container-fluid">
-                    <NavLink className="navbar-brand" to="/" replace >
-                        Famille de Mahieu
-                    </NavLink>
-                    <NavLink className="navbar-brand" to="/anniversaire" >
-                        Annif
-                    </NavLink>
-                    <button
-                        className="buttonConnexion" onClick = {() => {Firebase.signInWithGoogle()}}>
-                        Connexion
-                    </button>
-                </div>
-</nav>*/}
+            </nav>
         </>
      );
 }

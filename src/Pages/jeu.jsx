@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChooseOnePeople } from '../Functions/FilterData';
+import { RandomizeArray } from '../Functions/FilterData';
 
 const Jeu = () => {
 
@@ -59,7 +59,7 @@ const Jeu = () => {
     }
 
     function ChooseData(){
-        let data = ChooseOnePeople();
+        let data = RandomizeArray();
         let dataFiltred = [];
         if(level === 1){
             data.forEach((element) => {
@@ -80,7 +80,7 @@ const Jeu = () => {
     }
 
     useEffect(() => {
-        let data = ChooseOnePeople();
+        let data = RandomizeArray();
         let dataFiltred = [];
         if(level === 1){
             data.forEach((element) => {
