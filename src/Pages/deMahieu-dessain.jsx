@@ -3,7 +3,7 @@ import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import fireBase from '../firebase';
 import { MyFilter, DataInOptions, copyData } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectPerson';
-import {ACTUAL_GENERATION} from "../constant"
+import {ACTUAL_GENERATION} from "../constant";
 
 
 const Family = ({match}) => {
@@ -51,8 +51,18 @@ const Family = ({match}) => {
 			<SelectPerson
 				data={options}
 			/>
-			{famillyFiltred[0] !== undefined && 
-				<h1>{famillyFiltred[0].famillyName}</h1>
+			{famillyFiltred[0] !== undefined &&
+				<div>
+				<h1 className='mb-0'>{famillyFiltred[0].famillyName}</h1>
+				{
+					famillyFiltred[0].dateMariage !== undefined &&
+					<h4 className='text-center mb-4'>{famillyFiltred[0].dateMariage}</h4>
+				}
+				{
+					famillyFiltred[0].dateMariage === undefined &&
+					<h4 className='text-center mb-4'></h4>
+				}
+				</div>
 			}
 			<div className="containerFlexible">
 			{
@@ -67,6 +77,8 @@ const Family = ({match}) => {
 						dateDeces={person.deathDate}
 						link="#"
 						generation={person.generation}
+						//className='elementFlexibleCustom'
+						//description={person.description}
 					/>
 					}
 				

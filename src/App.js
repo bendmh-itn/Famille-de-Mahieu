@@ -7,6 +7,7 @@ import AnniversairePage from "./Pages/anniversaire";
 import Generation3 from "./Pages/generation3";
 import Generation4 from "./Pages/generation4";
 import Jeu from "./Pages/jeu";
+import Profil from "./Pages/profilUser";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/generation3" component={Generation3} />
               <Route path="/anniversaire" component={AnniversairePage} />
               <Route path="/jeu" component={Jeu} />
+              <Route path="/profil" component={Profil} />
               <Route path="/" component={HomePage} />
             </Switch>
           </main>

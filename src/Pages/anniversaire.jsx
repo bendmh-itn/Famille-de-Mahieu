@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { MoisPersons } from '../Functions/FilterData';
-import {ACTUAL_GENERATION} from "../constant"
+import {ACTUAL_GENERATION} from "../constant";
 
 
 const Anniversaire = () => {
@@ -48,7 +48,7 @@ const Anniversaire = () => {
 						dateDeces={person.deathDate}
 						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
 						generation={person.generation}
-                        myBirthday={person.birthDate.split("/")[0] === day.toString() ? true : false}
+                        myBirthday={person.birthDate.split("/")[0] === (day.toString() < 10 ? "0" + day.toString() : day.toString()) ? true : false}
 					/>
 					}
 				

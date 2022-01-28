@@ -1,4 +1,17 @@
+import { ACTUAL_GENERATION } from "../constant";
+import fireBase from "../firebase";
+
 var allData = [];
+
+export const getData = () => {
+  if (allData.length === 0) {
+    fireBase.findAll().then((querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      copyData(data);
+    });
+  }
+  return allData;
+};
 
 export const copyData = (data) => {
   allData = [];
@@ -22,10 +35,66 @@ export const MyFilter = (numberFamilly, generation) => {
   return filteredData;
 };
 
+export const ChildrenInOptions = (numberFamilly, generation) => {
+  var options = [];
+  var valueCompare = numberFamilly.toString().slice(0, generation - 1);
+  allData
+    .filter(
+      (person) =>
+        person.numberFamilly.toString().slice(0, generation - 1) ===
+          valueCompare && person.numberFamilly < valueCompare * 10 + 10
+    )
+    .map((element) => {
+      return options.push({
+        value: element.generation + "/" + element.numberFamilly,
+        label: element.firstName + " " + element.lastName,
+      });
+    });
+  return options;
+};
+
 export const DataInOptions = () => {
   var options = [];
   allData
-    .filter((person) => person.generation !== "4")
+    .filter((person) => person.generation !== ACTUAL_GENERATION)
+    .map((element) => {
+      return options.push({
+        value: element.generation + "/" + element.numberFamilly,
+        label: element.firstName + " " + element.lastName,
+      });
+    });
+  return options;
+};
+
+export const FindOnePersonByNumberFamilly = (numberFamilly) => {
+  var filteredData = [];
+  allData
+    .filter((person) => person.numberFamilly === numberFamilly)
+    .map((person) => {
+      return filteredData.push(person);
+    });
+  return filteredData[0];
+};
+
+export const FindOnePersonByEmail = (email) => {
+  var filteredData = [];
+  allData
+    .filter((person) => person.email === email)
+    .map((person) => {
+      return filteredData.push(person);
+    });
+  return filteredData[0];
+};
+
+export const AllDataInOptions = () => {
+  var options = [];
+  allData
+    .filter(
+      (person) =>
+        person.generation !== "1" &&
+        person.generation !== ACTUAL_GENERATION &&
+        person.email === undefined
+    )
     .map((element) => {
       return options.push({
         value: element.generation + "/" + element.numberFamilly,
@@ -68,7 +137,6 @@ export const MoisPersons = () => {
     now.getMonth() + 1 < 10
       ? "0" + (now.getMonth() + 1).toString()
       : (now.getMonth() + 1).toString();
-  console.log(moisAnnee);
   allData.forEach((element) => {
     if (element.birthDate.split("/")[1] === moisAnnee) {
       data.push(element);

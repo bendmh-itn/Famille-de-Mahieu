@@ -47,10 +47,22 @@ table {
   img {
     width: 80%;
   }
+  .elementFlexibleCustom {
+    text-align: center;
+    flex-grow: 1;
+  }
+  .myParagraph {
+    padding: 0 20px;
+  }
 }
 @media screen and (min-width: 751px) and (max-width: 40000px) {
   img {
     height: 300px;
+  }
+  .elementFlexibleCustom {
+    text-align: center;
+    flex-grow: 1;
+    width: 40%;
   }
 }
 
@@ -80,6 +92,23 @@ table {
 .clignote {
   color: hsl(324, 70%, 45%);
   animation: wheelHueColor 3s linear infinite;
+}
+
+.email {
+  font-size: x-large;
+}
+
+.frontCard {
+  display: block;
+}
+
+.turnImage {
+  transform: rotateY(180deg);
+  transition: transform 5s;
+}
+
+.backCard {
+  display: none;
 }
 
 @keyframes wheelHueColor {
