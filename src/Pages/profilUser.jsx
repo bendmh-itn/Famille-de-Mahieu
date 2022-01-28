@@ -122,12 +122,10 @@ const ConfirmEmail = () => {
         fireBase.FindEmailPerson(emailUser)
         .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.id);
-            console.log(data);
             if(data[0] !== undefined){
                 setId(data[0]);
                 setConfirmedAccount(true);
                 const person = FindOnePersonByEmail(emailUser);
-                console.log(person);
                 person.dateMariage = person.dateMariage === undefined ? "" : person.dateMariage;
                 setLastName(person.lastName);
                 setFirstName(person.firstName);
