@@ -38,18 +38,37 @@ export const MyFilter = (numberFamilly, generation) => {
 export const ChildrenInOptions = (numberFamilly, generation) => {
   var options = [];
   var valueCompare = numberFamilly.toString().slice(0, generation - 1);
-  allData
-    .filter(
-      (person) =>
-        person.numberFamilly.toString().slice(0, generation - 1) ===
-          valueCompare && person.numberFamilly < valueCompare * 10 + 10
-    )
-    .map((element) => {
-      return options.push({
-        value: element.generation + "/" + element.numberFamilly,
-        label: element.firstName + " " + element.lastName,
+  if (generation === "3") {
+    allData
+      .filter(
+        (person) =>
+          person.numberFamilly.toString().slice(0, generation - 1) ===
+            valueCompare && person.numberFamilly < valueCompare * 10 + 10
+      )
+      .map((element) => {
+        return options.push({
+          value: element.generation + "/" + element.numberFamilly,
+          label: element.firstName + " " + element.lastName,
+        });
       });
-    });
+  } else {
+    allData
+      .filter(
+        (person) =>
+          person.numberFamilly.toString().slice(0, generation - 1) ===
+            valueCompare && person.numberFamilly <= valueCompare * 10
+        /*(person.numberFamilly.toString().slice(0, generation - 1) ===
+            valueCompare &&
+            person.generation === ACTUAL_GENERATION) ||
+          person.numberFamilly === numberFamilly*/
+      )
+      .map((element) => {
+        return options.push({
+          value: element.generation + "/" + element.numberFamilly,
+          label: element.firstName + " " + element.lastName,
+        });
+      });
+  }
   return options;
 };
 
