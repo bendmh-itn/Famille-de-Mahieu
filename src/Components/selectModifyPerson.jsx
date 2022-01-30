@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select'
 
 
-const SelectModifyPerson = ({data, modifyPerson}) => {
+const SelectModifyPerson = ({data, modifyPerson, isClearable = true}) => {
     const searchFamilly = (event) => {
         if(event !== null){
             modifyPerson(event.value)
@@ -13,7 +13,7 @@ const SelectModifyPerson = ({data, modifyPerson}) => {
 
     return ( 
         <>
-            <Select id="searchFamilly" options={data} isClearable={true} isSearchable={true} onChange={searchFamilly} />
+            <Select id="searchFamilly" options={data} isClearable={isClearable} isSearchable={true} onChange={searchFamilly} />
         </>
      );
 }

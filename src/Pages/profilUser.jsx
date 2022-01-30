@@ -3,7 +3,7 @@ import '../App.css';
 import fireBase from '../firebase';
 import { storage } from '../firebase';
 import {UserContext} from '../Components/Providers/UserProvider';
-import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions } from '../Functions/FilterData';
+import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions, addEmail } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectModifyPerson';
 
 const ConfirmEmail = () => {
@@ -12,67 +12,63 @@ const ConfirmEmail = () => {
     const [options, setOptions] = useState([]);
     const [message, setMessage] = useState("");
     const [id, setId] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [birthDate, setBirthDate] = useState("");
-    const [numberFamilly, setNumberFamilly] = useState(0);
-    const [generation, setGeneration] = useState("");
-    const [famillyName, setFamillyName] = useState("");
     const [picture, setPicture] = useState("");
-    const [dateMariage, setDateMariage] = useState("");
     //const [description, setDescription] = useState("");
     const [confirmedAccount, setConfirmedAccount] = useState(false);
     const [pictureChanged, setPictureChanged] = useState(false);
     const [myClass, setMyClass] = useState("backCard");
+    const [dataCharged, setDataCharged] = useState("");
+    const [personSelect, setPersonSelect] = useState([]);
 
     
     const value = useContext(UserContext);
 
     const addEmailUser = () => {
-        fireBase.ModifyUserFireBase(id,lastName, firstName, birthDate, numberFamilly, generation, picture, famillyName, dateMariage, emailUser).then(() => {
-            setMessage("Votre adresse a bien été ajouté.");
-            setMyClass("frontCard");
+        personSelect.email = emailUser;
+        fireBase.ModifyUserFireBase(id, personSelect).then(() => {
+            setMessage("Votre adresse a bien été ajoutée.");
           })
           .catch((error) => {
             setMessage("Error writing document: " + error);
           });
+          addEmail(personSelect.numberFamilly, emailUser);
+          setConfirmedAccount(true);
+          setMyClass("frontCard");
     }
 
     const modifyPersonSelect = (e) => {
         if(e !== null){
             let numberFamilly = e.split('/')[1];
             const person = FindOnePersonByNumberFamilly(numberFamilly);
-            person.dateMariage = person.dateMariage === undefined ? "" : person.dateMariage;
-            person.description = person.description === undefined? "" : person.description;
-            setLastName(person.lastName);
-            setFirstName(person.firstName);
-            setGeneration(person.generation);
-            setNumberFamilly(person.numberFamilly);
-            setBirthDate(person.birthDate);
-            setFamillyName(person.famillyName);
-            setPicture(person.pictureName);
-            setDateMariage(person.dateMariage);
+            if(person.email === undefined){
+                person.email = "";
+            }
+            setPersonSelect(person);
             fireBase.FindIdPerson(numberFamilly)
             .then(querySnapshot => {
-				const data = querySnapshot.docs.map(doc => doc.id);
+				const data = querySnapshot.docs.map(doc => doc.id)
 				setId(data[0]);
 			});
-        }else{
-            RefreshField();
         }
+        setMyClass("backCard");
     }
 
 
 
     const onChangePicture = e => {
+        const { name } = e.target;
+        setPersonSelect({
+            ...personSelect,
+            [name]: e.target.files[0]
+        });
         setPicture(e.target.files[0]);
         setPictureChanged(true);
     };
 
     const modifyPerson = () => {
         if(!pictureChanged){
-            fireBase.ModifyUserFireBase(id, lastName, firstName, birthDate, numberFamilly, generation, picture, famillyName, dateMariage, emailUser).then(() => {
-                setMessage("Vos données ont bien été modifié");
+            fireBase.ModifyUserFireBase(id, personSelect).then(() => {
+                setMessage("Vos données ont bien été modifiées");
               })
               .catch((error) => {
                 setMessage("Error writing document: " + error);
@@ -91,8 +87,8 @@ const ConfirmEmail = () => {
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
-                            fireBase.ModifyUserFireBase(id, lastName, firstName, birthDate, numberFamilly, generation, pictureName, famillyName, dateMariage, emailUser).then(() => {
-                                setMessage("Vos données ont bien été modifié");
+                            fireBase.ModifyUserFireBase(id, personSelect, pictureName).then(() => {
+                                setMessage("Vos données ont bien été modifiées");
                                 })
                                 .catch((error) => {
                                 setMessage("Error writing document: " + error);
@@ -101,51 +97,57 @@ const ConfirmEmail = () => {
                 }
             )
         }
+        setMyClass("frontCard");
     }
 
-    function RefreshField (){
-        setId("");
-        setLastName("");
-        setFirstName("");
-        setGeneration("");
-        setNumberFamilly("");
-        setBirthDate("");
-        setFamillyName("");
-        setDateMariage("");
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setPersonSelect({
+            ...personSelect,
+            [name]: value
+        });
+    };
     
     useEffect(() => {
+        let userMail;
         if(value !== null){
+            setDataCharged(value);
+            userMail = value.email;
             setEmailUser(value.email);
             setOptions(AllDataInOptions());
         }
-        fireBase.FindEmailPerson(emailUser)
-        .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.id);
-            if(data[0] !== undefined){
-                setId(data[0]);
-                setConfirmedAccount(true);
-                const person = FindOnePersonByEmail(emailUser);
-                person.dateMariage = person.dateMariage === undefined ? "" : person.dateMariage;
-                setLastName(person.lastName);
-                setFirstName(person.firstName);
-                setGeneration(person.generation);
-                setNumberFamilly(person.numberFamilly);
-                setBirthDate(person.birthDate);
-                setFamillyName(person.famillyName);
-                setPicture(person.pictureName);
-                setDateMariage(person.dateMariage);
+        if(!confirmedAccount && dataCharged !== ""){
+            fireBase.FindEmailPerson(userMail)
+            .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => doc.id);
+                if(data[0] !== undefined){
+                    setId(data[0]);
+                    setConfirmedAccount(true);
+                    const person = FindOnePersonByEmail(userMail);
+                    if(person !== undefined){
+                        setPersonSelect(person);
+                        setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
+                    }
+                }
+            });
+        }
+        if(confirmedAccount){
+            const person = FindOnePersonByEmail(userMail);
+            if(person !== undefined){
+                setPersonSelect(person);
                 setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
             }
-        });
-    },[emailUser]);
+        }
+    },[dataCharged, confirmedAccount]);
 
     return ( 
         <>
-            <div className='container'>
+            <div className='container mt-4'>
             {
-                emailUser === "" &&
-                <h3>Reviens à la page d'accueil : Famille de Mahieu</h3>
+                dataCharged === "" &&
+                <div>
+                    <h2>Les données n'ont pas chargées, retourne à la page de Famille de Mahieu</h2>
+                </div>
             }
             {
                 emailUser !== "" && !confirmedAccount &&
@@ -173,19 +175,23 @@ const ConfirmEmail = () => {
                     <h2>Votre profil</h2>
                     <div className="form-group">
                         <label>Date de mariage</label>
-                        <input className="form-control" value={dateMariage} placeholder="Date de mariage" onChange={e => setDateMariage(e.target.value)}/>
+                        <input className="form-control" name='dateMariage' value={personSelect.dateMariage || ''} placeholder="Date de mariage" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
                         <label>Nom</label>
-                        <input className="form-control" value={lastName} placeholder="Nom..." onChange={e => setLastName(e.target.value)}/>
+                        <input className="form-control" name='lastName' value={personSelect.lastName || ''} placeholder="Nom..." onChange={handleChange}/>
                     </div>
                     <div className="form-group">
                         <label>Prénom</label>
-                        <input className="form-control" value={firstName} placeholder="Prénom..." onChange={e => setFirstName(e.target.value)}/>
+                        <input className="form-control" name='firstName' value={personSelect.firstName || ''} placeholder="Prénom..." onChange={handleChange}/>
                     </div>
                     <div className="form-group">
                         <label>Date de naissance</label>
-                        <input className="form-control" value={birthDate} placeholder="Date de naissance..." onChange={e => setBirthDate(e.target.value)}/>
+                        <input className="form-control" name='birthDate'  value={personSelect.birthDate || ''} placeholder="Date de naissance..." onChange={handleChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input className="form-control" name='email' value={personSelect.email === undefined ? "" : personSelect.email} placeholder="Email..." onChange={handleChange}/>
                     </div>
                     {/*<div className="form-group">
                         <label>Description</label>
@@ -193,12 +199,14 @@ const ConfirmEmail = () => {
                     </div>*/}
                     <div className="form-group">
                         <label>Image profil</label>
-                        <input className="form-control" type="file" onChange={onChangePicture} />
+                        <input className="form-control" name='pictureName' type="file" onChange={onChangePicture} />
                     </div>
                     <button className="btn btn-secondary m-4" onClick={modifyPerson} >
                         Modifier
                     </button>
-                    <p>{message}</p>
+                    <div className={'alert alert-success ' + myClass} role="alert">
+                        <p>{message}</p>
+                    </div>
                     {
                         options.length !== 1 && 
                         <div>
@@ -206,6 +214,7 @@ const ConfirmEmail = () => {
                             <SelectPerson
                                 data={options}
                                 modifyPerson={modifyPersonSelect}
+                                isClearable={false}
                             />
                         </div>
                     }

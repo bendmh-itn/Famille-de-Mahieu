@@ -16,15 +16,20 @@ function App() {
         <HashRouter>
           <NavBar />
           <main>
-            <Switch>
-              <Route path="/:generation/:numberFamilly" component={HomePage} />
-              <Route path="/generation4" component={Generation4} />
-              <Route path="/generation3" component={Generation3} />
-              <Route path="/anniversaire" component={AnniversairePage} />
-              <Route path="/jeu" component={Jeu} />
-              <Route path="/profil" component={Profil} />
-              <Route path="/" component={HomePage} />
-            </Switch>
+            <div className="container mt-3">
+              <Switch>
+                <Route
+                  path="/:generation/:numberFamilly"
+                  component={HomePage}
+                />
+                <Route path="/generation4" component={Generation4} />
+                <Route path="/generation3" component={Generation3} />
+                <Route path="/anniversaire" component={AnniversairePage} />
+                <Route path="/jeu" component={Jeu} />
+                <Route path="/profil" component={Profil} />
+                <Route path="/" component={HomePage} />
+              </Switch>
+            </div>
           </main>
         </HashRouter>
       </UserProvider>

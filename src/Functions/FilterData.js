@@ -3,6 +3,15 @@ import fireBase from "../firebase";
 
 var allData = [];
 
+export const clearAllData = () => {
+  allData = [];
+};
+
+export const addEmail = (numberFamilly, email) => {
+  const person = FindOnePersonByNumberFamilly(numberFamilly);
+  person.email = email;
+};
+
 export const getData = () => {
   if (allData.length === 0) {
     fireBase.findAll().then((querySnapshot) => {
@@ -110,9 +119,10 @@ export const AllDataInOptions = () => {
   allData
     .filter(
       (person) =>
-        person.generation !== "1" &&
-        person.generation !== ACTUAL_GENERATION &&
-        person.email === undefined
+        (person.generation !== "1" &&
+          person.generation !== ACTUAL_GENERATION &&
+          person.email === undefined) ||
+        person.email === ""
     )
     .map((element) => {
       return options.push({

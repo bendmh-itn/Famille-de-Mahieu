@@ -36,28 +36,17 @@ function FindEmailPerson(email) {
   return db.collection("famille").where("email", "==", email).get();
 }
 
-function ModifyUserFireBase(
-  id,
-  lastName,
-  firstName,
-  birthDate,
-  numberFamilly,
-  generation,
-  pictureName,
-  famillyName,
-  dateMariage,
-  email
-) {
+function ModifyUserFireBase(id, person, pictureName = "") {
   return db.collection("famille").doc(id).set({
-    firstName: firstName,
-    lastName: lastName,
-    generation: generation,
-    birthDate: birthDate,
-    numberFamilly: numberFamilly,
-    pictureName: pictureName,
-    famillyName: famillyName,
-    dateMariage: dateMariage,
-    email: email,
+    firstName: person.firstName,
+    lastName: person.lastName,
+    generation: person.generation,
+    birthDate: person.birthDate,
+    numberFamilly: person.numberFamilly,
+    pictureName: pictureName === "" ? person.pictureName : pictureName,
+    famillyName: person.famillyName,
+    dateMariage: person.dateMariage,
+    email: person.email,
   });
 }
 
