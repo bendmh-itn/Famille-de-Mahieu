@@ -37,17 +37,20 @@ function FindEmailPerson(email) {
 }
 
 function ModifyUserFireBase(id, person, pictureName = "") {
-  return db.collection("famille").doc(id).set({
-    firstName: person.firstName,
-    lastName: person.lastName,
-    generation: person.generation,
-    birthDate: person.birthDate,
-    numberFamilly: person.numberFamilly,
-    pictureName: pictureName === "" ? person.pictureName : pictureName,
-    famillyName: person.famillyName,
-    dateMariage: person.dateMariage,
-    email: person.email,
-  });
+  return db
+    .collection("famille")
+    .doc(id)
+    .set({
+      firstName: person.firstName,
+      lastName: person.lastName,
+      generation: person.generation,
+      birthDate: person.birthDate,
+      numberFamilly: person.numberFamilly,
+      pictureName: pictureName === "" ? person.pictureName : pictureName,
+      famillyName: person.famillyName,
+      dateMariage: person.dateMariage,
+      email: person.email,
+    });
 }
 
 export const storage = firebase.storage();
