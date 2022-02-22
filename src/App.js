@@ -8,13 +8,19 @@ import Generation3 from "./Pages/generation3";
 import Generation4 from "./Pages/generation4";
 import Jeu from "./Pages/jeu";
 import Profil from "./Pages/profilUser";
+import NavBarMobile from "./Components/navBarMobile";
 
 function App() {
   return (
     <div className="App">
       <UserProvider>
         <HashRouter>
-          <NavBar />
+          <div className="d-none d-sm-none d-md-block">
+            <NavBar />
+          </div>
+          <div className="d-block d-sm-block d-md-block d-lg-none">
+            <NavBarMobile />
+          </div>
           <main>
             <div className="container mt-3">
               <Switch>

@@ -30,10 +30,18 @@ const NavBar = () => {
                             <NavLink className="navbar-brand" to="/profil">Profil</NavLink>
                         </li>
                     </ul>
-                    <button
-                        className="buttonConnexion navbar-brand text-right" onClick = {() => {Firebase.signInWithGoogle()}}>
-                        Connexion
-                    </button>
+                    {(localStorage.getItem("email") === null || localStorage.getItem("email") === "") &&
+                        <button
+                            className="buttonConnexion navbar-brand text-right" onClick = {() => {Firebase.signInWithGoogle()}}>
+                            Connexion
+                        </button>
+                    }
+                    {localStorage.getItem("email") !== null && localStorage.getItem("email") !== "" &&
+                        <button
+                            className="buttonConnexion navbar-brand text-right" onClick = {() => {Firebase.Disconnect()}}>
+                            Déconnexion
+                        </button>
+                    }
                 </div>
             </nav>
         </>

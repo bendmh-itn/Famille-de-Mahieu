@@ -57,8 +57,29 @@ export const storage = firebase.storage();
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+
 const signInWithGoogle = () => {
-  auth.signInWithPopup(provider);
+  auth
+    .signInWithPopup(provider)
+    .then((result) => {
+      const email = result.user.email;
+      localStorage.setItem("email", email);
+    })
+    .then(() => {
+      window.location.reload();
+    });
+};
+
+const Disconnect = () => {
+  auth
+    .signOut()
+    .then(() => {
+      localStorage.setItem("email", "");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 const test = {
   findAll,
@@ -66,6 +87,7 @@ const test = {
   FindIdPerson,
   ModifyUserFireBase,
   FindEmailPerson,
+  Disconnect,
 };
 
 export default test;

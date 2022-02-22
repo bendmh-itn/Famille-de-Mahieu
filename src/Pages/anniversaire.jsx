@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { MoisPersons } from '../Functions/FilterData';
 import {ACTUAL_GENERATION} from "../constant";
+import {sendMessageBirthday} from "../Functions/mailer";
 
 
 const Anniversaire = () => {
@@ -54,6 +55,10 @@ const Anniversaire = () => {
 				
 			)}
 			</div>
+            {/*<form onSubmit={sendMessageBirthday}>
+                <input type="text" name="name" />
+                <input type="submit" value="send" />
+                </form>*/}
         </>
      );
 }
