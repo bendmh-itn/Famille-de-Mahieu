@@ -73,18 +73,6 @@ const ConfirmEmail = () => {
         setMyClass("backCard");
     }
 
-
-
-    const onChangePicture = e => {
-        const { name } = e.target;
-        setPersonSelect({
-            ...personSelect,
-            [name]: e.target.files[0]
-        });
-        setPicture(e.target.files[0]);
-        setPictureChanged(true);
-    };
-
     const modifyPerson = () => {
         if(!pictureChanged){
             fireBase.ModifyUserFireBase(id, personSelect).then(() => {

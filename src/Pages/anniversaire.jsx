@@ -3,28 +3,20 @@ import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { MoisPersons, getData, copyData } from '../Functions/FilterData';
 import {ACTUAL_GENERATION} from "../constant";
 import fireBase from '../firebase';
+import axios from 'axios';
 
 
 const Anniversaire = () => {
 	const [famillyFiltred, setFamillyFiltred] = useState([]);
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
+
+    const sendMessage = (person) => {
+        const response = axios.get("https://test-service-6568.twil.io/sendSMS?firstname="+ person.firstName + "&lastname=" + person.lastName);
+        console.log(response);
+    }
 	
     useEffect(() => {
-        let dataFinal;
-        let dataStored = getData();
-        if(dataStored.length === 0){
-            fireBase.findAll()
-			.then(querySnapshot => {
-				const data = querySnapshot.docs.map(doc => doc.data());
-				copyData(data);
-                dataFinal = MoisPersons();
-                setFamillyFiltred(dataFinal);
-			})
-        }else{
-            dataFinal = MoisPersons();
-            setFamillyFiltred(dataFinal);
-        }
         const months = [
             'janvier',
             'février',
@@ -42,12 +34,35 @@ const Anniversaire = () => {
         let now = new Date();
         setMonth(months[now.getMonth()]);
         setDay(now.getDate());
+        const checkForBirthday = (data) => {
+            data.forEach(person => {
+                if(person.birthDate.split("/")[0] === (now.getDate().toString() < 10 ? "0" + now.getDate().toString() : now.getDate().toString())){
+                    sendMessage(person);
+                }
+            });
+        }
+        let dataFinal;
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+                dataFinal = MoisPersons();
+                checkForBirthday(dataFinal);
+                setFamillyFiltred(dataFinal);
+			})
+        }else{
+            dataFinal = MoisPersons();
+            checkForBirthday(dataFinal);
+            setFamillyFiltred(dataFinal);
+        }
     }, []);
 
     return ( 
         <>
             <div className="container">
-			    <h2 className="text-center">Anniversaire de {month}</h2>
+			    <h2 className="text-center mb-3">{famillyFiltred.length} anniversaire(s) en {month}</h2>
             </div>
 			<div className="containerFlexible">
 			{

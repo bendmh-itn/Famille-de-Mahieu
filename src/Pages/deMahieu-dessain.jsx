@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import fireBase from '../firebase';
-import { MyFilter, DataInOptions, copyData } from '../Functions/FilterData';
+import { MyFilter, DataInOptions, copyData, getData } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectPerson';
 import {ACTUAL_GENERATION} from "../constant";
 
@@ -12,7 +12,34 @@ const Family = ({match}) => {
 	const [options, setOptions] = useState([]);
 	
     useEffect(() => {
-		if(options.length === 0){
+		var numberFamilly = match.params.numberFamilly;
+		var generation = match.params.generation;
+		setGeneration(match.params.generation);
+		if(generation === undefined || numberFamilly === undefined){
+			numberFamilly = 0;
+			generation = "1";
+			setGeneration("1")
+		}
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+				const FilterData = MyFilter(numberFamilly, generation);
+				setFamillyFiltred([]);
+				setFamillyFiltred(FilterData);
+        		setOptions(DataInOptions());
+				window.scroll(0, 0);
+			})
+        }else{
+            const FilterData = MyFilter(numberFamilly, generation);
+			setOptions(DataInOptions());
+			setFamillyFiltred([]);
+			setFamillyFiltred(FilterData);
+			window.scroll(0, 0);
+        }
+		/*if(options.length === 0){
 			fireBase.findAll()
 			.then(querySnapshot => {
 				var numberFamilly = match.params.numberFamilly;
@@ -44,7 +71,7 @@ const Family = ({match}) => {
 			setFamillyFiltred([]);
 			setFamillyFiltred(FilterData);
 			window.scroll(0, 0);
-		}
+		}*/
     }, [match.params.generation, match.params.numberFamilly]);
     return ( 
         <>
