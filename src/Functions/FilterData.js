@@ -1,5 +1,4 @@
 import { ACTUAL_GENERATION } from "../constant";
-import fireBase from "../firebase";
 
 var allData = [];
 
@@ -13,12 +12,6 @@ export const addEmail = (numberFamilly, email) => {
 };
 
 export const getData = () => {
-  if (allData.length === 0) {
-    fireBase.findAll().then((querySnapshot) => {
-      const data = querySnapshot.docs.map((doc) => doc.data());
-      copyData(data);
-    });
-  }
   return allData;
 };
 
@@ -66,10 +59,6 @@ export const ChildrenInOptions = (numberFamilly, generation) => {
         (person) =>
           person.numberFamilly.toString().slice(0, generation - 1) ===
             valueCompare && person.numberFamilly <= valueCompare * 10
-        /*(person.numberFamilly.toString().slice(0, generation - 1) ===
-            valueCompare &&
-            person.generation === ACTUAL_GENERATION) ||
-          person.numberFamilly === numberFamilly*/
       )
       .map((element) => {
         return options.push({

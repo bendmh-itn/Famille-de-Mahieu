@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
-import { MoisPersons } from '../Functions/FilterData';
+import { MoisPersons, getData, copyData } from '../Functions/FilterData';
 import {ACTUAL_GENERATION} from "../constant";
-import {sendMessageBirthday} from "../Functions/mailer";
+import fireBase from '../firebase';
 
 
 const Anniversaire = () => {
@@ -11,6 +11,20 @@ const Anniversaire = () => {
     const [day, setDay] = useState("");
 	
     useEffect(() => {
+        let dataFinal;
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+                dataFinal = MoisPersons();
+                setFamillyFiltred(dataFinal);
+			})
+        }else{
+            dataFinal = MoisPersons();
+            setFamillyFiltred(dataFinal);
+        }
         const months = [
             'janvier',
             'février',
@@ -25,11 +39,9 @@ const Anniversaire = () => {
             'novembre',
             'décembre'
           ]
-		let data = MoisPersons();
         let now = new Date();
         setMonth(months[now.getMonth()]);
         setDay(now.getDate());
-        setFamillyFiltred(data);
     }, []);
 
     return ( 
@@ -39,7 +51,8 @@ const Anniversaire = () => {
             </div>
 			<div className="containerFlexible">
 			{
-				famillyFiltred
+				famillyFiltred !== undefined && 
+                    famillyFiltred
 					.map((person) => {
 					return <TrombinoscopeFlex
 						key={person.firstName + "" + person.famillyName}
@@ -55,10 +68,6 @@ const Anniversaire = () => {
 				
 			)}
 			</div>
-            {/*<form onSubmit={sendMessageBirthday}>
-                <input type="text" name="name" />
-                <input type="submit" value="send" />
-                </form>*/}
         </>
      );
 }
