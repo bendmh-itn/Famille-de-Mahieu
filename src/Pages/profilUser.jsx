@@ -5,6 +5,7 @@ import { storage } from '../firebase';
 import {UserContext} from '../Components/Providers/UserProvider';
 import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions, addEmail } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectModifyPerson';
+import Compressor from 'compressorjs';
 
 const ConfirmEmail = () => {
 
@@ -35,6 +36,25 @@ const ConfirmEmail = () => {
           setConfirmedAccount(true);
           setMyClass("frontCard");
     }
+
+    const handleCompressedUpload = (e) => {
+        const { name } = e.target;
+        const image = e.target.files[0];
+        setPersonSelect({
+            ...personSelect,
+            [name]: image
+        });
+        
+        new Compressor(image, {
+          quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
+          success: (compressedResult) => {
+            // compressedResult has the compressed file.
+            // Use the compressed file to upload the images to your server.
+            setPicture(compressedResult);
+            setPictureChanged(true);
+          },
+        });
+      };
 
     const modifyPersonSelect = (e) => {
         if(e !== null){
@@ -199,7 +219,7 @@ const ConfirmEmail = () => {
                     </div>*/}
                     <div className="form-group">
                         <label>Image profil</label>
-                        <input className="form-control" name='pictureName' type="file" onChange={onChangePicture} />
+                        <input className="form-control" name='pictureName' type="file" onChange={handleCompressedUpload} />
                     </div>
                     <button className="btn btn-secondary m-4" onClick={modifyPerson} >
                         Modifier
