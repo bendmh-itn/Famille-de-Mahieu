@@ -49,12 +49,12 @@ const Anniversaire = () => {
 				const data = querySnapshot.docs.map(doc => doc.data());
 				copyData(data);
                 dataFinal = MoisPersons();
-                checkForBirthday(dataFinal);
+                //checkForBirthday(dataFinal);
                 setFamillyFiltred(dataFinal);
 			})
         }else{
             dataFinal = MoisPersons();
-            checkForBirthday(dataFinal);
+            //checkForBirthday(dataFinal);
             setFamillyFiltred(dataFinal);
         }
     }, []);
