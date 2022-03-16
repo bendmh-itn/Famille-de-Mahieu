@@ -166,6 +166,7 @@ const ConfirmEmail = () => {
                     <div className="alert alert-danger" role="alert">
                         Ne te trompe surtout pas
                     </div>
+                    <p>{66 - options.length} personnes ont confirmé leur adresse</p>
                     <SelectPerson
                         data={options}
                         modifyPerson={modifyPersonSelect}

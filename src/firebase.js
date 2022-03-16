@@ -37,9 +37,9 @@ function FindEmailPerson(email) {
 }
 
 function ModifyUserFireBase(id, person, pictureName = "") {
-  person.dateMariage === undefined
-    ? (person.dateMariage = "")
-    : (person.dateMariage = person.dateMariage);
+  if (person.dateMariage === undefined) {
+    person.dateMariage = "";
+  }
   return db
     .collection("famille")
     .doc(id)

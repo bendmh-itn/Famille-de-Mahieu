@@ -175,6 +175,23 @@ export const FilterByGeneration = (e) => {
   return data;
 };
 
+const FilterByPicture = (e) => {
+  let data = [];
+  allData.forEach((element) => {
+    if (
+      element.pictureName !==
+        "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fnaruto-g5ac97839f_640.png?alt=media&token=89f220af-2915-4dcc-9fd7-6e69de09fe7c" &&
+      element.pictureName !==
+        "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fhomme.PNG?alt=media&token=e9014335-a2b9-48a8-9732-f9997269b515" &&
+      element.pictureName !==
+        "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Ffemme.PNG?alt=media&token=1e2723b0-31a3-44de-a503-d2d7c0694e88"
+    ) {
+      data.push(element);
+    }
+  });
+  return data;
+};
+
 //fonction qui permet d'obtenir un nombre aléatoire entre 0 et max
 /*function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -182,7 +199,8 @@ export const FilterByGeneration = (e) => {
 
 export const RandomizeArray = () => {
   let data = [];
-  data = randomize(allData);
+  let dataFiltred = FilterByPicture(allData);
+  data = randomize(dataFiltred);
   return data;
 };
 

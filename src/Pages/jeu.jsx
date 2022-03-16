@@ -109,7 +109,6 @@ const Jeu = () => {
             {personSelected && total !== maximum &&
                 <div className="text-center">
                     <h1 className="text-center">Quel est mon prénom ?</h1>
-                    {total === 0 && <p>Désolé, pour ceux qui n'ont pas mis de photo, c'est d'office faux sauf si vous devinez au hasard</p>}
                     <img src={personSelected.pictureName} alt={personSelected.firstName} /> 
                     {indice && <h2>{personSelected.lastName}</h2>}
                     <div className="form-group mt-4">
