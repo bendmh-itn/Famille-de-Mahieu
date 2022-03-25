@@ -1,23 +1,28 @@
-import React, {useState} from 'react';
-import { NavLink } from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import { NavLink, useLocation } from "react-router-dom";
 import Firebase from "../firebase";
 
 const NavBarMobile = () => {
-    const [menuSelected, setMenuSelected] = useState("home");
+    const [menuSelected, setMenuSelected] = useState("");
 
     const changeMenuSelected = (menu) => {
         setMenuSelected(menu);
     }
+    const location = useLocation();
+    useEffect(() => {
+        setMenuSelected(location.pathname.substring(1));
+    }, []);
+
     return ( 
         <>
             <nav id="MyModification" className="navbar navbar-expand-lg navbar-dark">
-                <NavLink onClick={() => changeMenuSelected("home")} className="navbar-brand" to="/">
-                    {menuSelected === "home" && <ion-icon name="home-sharp"></ion-icon>}
-                    {menuSelected !== "home" && <ion-icon name="home-outline"></ion-icon>}  
+                <NavLink onClick={() => changeMenuSelected("")} className="navbar-brand" to="/">
+                    {menuSelected === "" && <ion-icon name="home-sharp"></ion-icon>}
+                    {menuSelected !== "" && <ion-icon name="home-outline"></ion-icon>}  
                 </NavLink>
-                <NavLink onClick={() => changeMenuSelected("annif")} className="navbar-brand" to="/anniversaire">
-                    {menuSelected === "annif" && <ion-icon name="balloon-sharp"></ion-icon>}
-                    {menuSelected !== "annif" && <ion-icon name="balloon-outline"></ion-icon>}
+                <NavLink onClick={() => changeMenuSelected("anniversaire")} className="navbar-brand" to="/anniversaire">
+                    {menuSelected === "anniversaire" && <ion-icon name="balloon-sharp"></ion-icon>}
+                    {menuSelected !== "anniversaire" && <ion-icon name="balloon-outline"></ion-icon>}
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("generation3")} className="navbar-brand" to="/generation3">
                     {menuSelected === "generation3" && <ion-icon name="reorder-three-sharp"></ion-icon>}

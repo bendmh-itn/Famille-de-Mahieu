@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { RandomizeArray } from '../Functions/FilterData';
+import { RandomizeArray, getData, copyData } from '../Functions/FilterData';
+import fireBase from '../firebase';
 
 const Jeu = () => {
 
@@ -80,23 +81,49 @@ const Jeu = () => {
     }
 
     useEffect(() => {
-        let data = RandomizeArray();
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+                let dataFinal = RandomizeArray();
+                let dataFiltred = [];
+                if(level === 1){
+                    dataFinal.forEach((element) => {
+                        if (element.generation === "4") {
+                            dataFiltred.push(element);
+                        }
+                    });
+                    setTotal(0);
+                    setScore(0);
+                    setPerson(dataFiltred);
+                    setPersonSelected(dataFiltred[0]);
+                }else {
+                    setTotal(0);
+                    setScore(0);
+                    setPerson(dataFinal);
+                    setPersonSelected(dataFinal[0]);
+                }
+			})
+        }
+        let dataFinal = RandomizeArray();
         let dataFiltred = [];
         if(level === 1){
-            data.forEach((element) => {
+            dataFinal.forEach((element) => {
                 if (element.generation === "4") {
                     dataFiltred.push(element);
                 }
-              });
-              setTotal(0);
-              setScore(0);
-              setPerson(dataFiltred);
-              setPersonSelected(dataFiltred[0]);
+            });
+            setTotal(0);
+            setScore(0);
+            setPerson(dataFiltred);
+            setPersonSelected(dataFiltred[0]);
         }else {
             setTotal(0);
             setScore(0);
-            setPerson(data);
-            setPersonSelected(data[0]);
+            setPerson(dataFinal);
+            setPersonSelected(dataFinal[0]);
         }
     }, [level]);
 
@@ -104,7 +131,7 @@ const Jeu = () => {
     <>
         <div className="container">
             {!personSelected &&
-                <h2>No data Selected. go back to the first page :'(</h2>
+                <h2>Les données arrivent. Soyez patient</h2>
             }
             {personSelected && total !== maximum &&
                 <div className="text-center">

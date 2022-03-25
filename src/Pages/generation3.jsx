@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
-import { FilterByGeneration } from '../Functions/FilterData';
+import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
+import fireBase from '../firebase';
 import {ACTUAL_GENERATION} from "../constant"
 
 
@@ -8,8 +9,22 @@ const Generation3 = () => {
 	const [famillyFiltred, setFamillyFiltred] = useState([]);
 	
     useEffect(() => {
-        let data = FilterByGeneration("3");
-        setFamillyFiltred(data);
+		let dataFinal;
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+                dataFinal = FilterByGeneration("3");
+                //checkForBirthday(dataFinal);
+                setFamillyFiltred(dataFinal);
+			})
+        }else{
+            dataFinal = FilterByGeneration("3");
+            //checkForBirthday(dataFinal);
+            setFamillyFiltred(dataFinal);
+        }
     }, []);
 
     return ( 

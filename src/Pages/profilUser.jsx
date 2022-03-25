@@ -5,6 +5,7 @@ import { storage } from '../firebase';
 import {UserContext} from '../Components/Providers/UserProvider';
 import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions, addEmail } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectModifyPerson';
+import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
 
 const ConfirmEmail = () => {
@@ -117,6 +118,15 @@ const ConfirmEmail = () => {
     };
     
     useEffect(() => {
+        let dataStored = getData();
+        if(dataStored.length === 0){
+            fireBase.findAll()
+			.then(querySnapshot => {
+				const data = querySnapshot.docs.map(doc => doc.data());
+				copyData(data);
+                setDataCharged(data);
+			})
+        }
         let userMail;
         if(value !== null){
             setDataCharged(value);
@@ -154,7 +164,7 @@ const ConfirmEmail = () => {
             {
                 dataCharged === "" &&
                 <div>
-                    <h2>Les données n'ont pas chargées, retourne à la page de Famille de Mahieu</h2>
+                    <h2>Les données arrivent. Soyez patient</h2>
                 </div>
             }
             {
@@ -166,7 +176,6 @@ const ConfirmEmail = () => {
                     <div className="alert alert-danger" role="alert">
                         Ne te trompe surtout pas
                     </div>
-                    <p>{66 - options.length} personnes ont confirmé leur adresse</p>
                     <SelectPerson
                         data={options}
                         modifyPerson={modifyPersonSelect}
