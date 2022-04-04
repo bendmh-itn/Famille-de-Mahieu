@@ -5,7 +5,7 @@ import { storage } from '../firebase';
 import {UserContext} from '../Components/Providers/UserProvider';
 import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions, addEmail } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectModifyPerson';
-import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
+import { getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
 
 const ConfirmEmail = () => {
@@ -156,7 +156,7 @@ const ConfirmEmail = () => {
                 setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
             }
         }
-    },[dataCharged, confirmedAccount]);
+    },[dataCharged, confirmedAccount, value]);
 
     return ( 
         <>

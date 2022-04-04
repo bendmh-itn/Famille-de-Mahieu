@@ -39,39 +39,6 @@ const Family = ({match}) => {
 			setFamillyFiltred(FilterData);
 			window.scroll(0, 0);
         }
-		/*if(options.length === 0){
-			fireBase.findAll()
-			.then(querySnapshot => {
-				var numberFamilly = match.params.numberFamilly;
-				var generation = match.params.generation;
-				setGeneration(match.params.generation);
-				if(generation === undefined || numberFamilly === undefined){
-					numberFamilly = 0;
-					generation = "1";
-					setGeneration("1")
-				}
-				const data = querySnapshot.docs.map(doc => doc.data());
-				copyData(data);
-				const FilterData = MyFilter(numberFamilly, generation);
-				setFamillyFiltred([]);
-				setFamillyFiltred(FilterData);
-        		setOptions(DataInOptions());
-				window.scroll(0, 0);
-			})
-		}else {
-			var numberFamilly = match.params.numberFamilly;
-			var generation = match.params.generation;
-			setGeneration(match.params.generation);
-			if(generation === undefined || numberFamilly === undefined){
-				numberFamilly = 0;
-				generation = "1";
-				setGeneration("1")
-			}
-			const FilterData = MyFilter(numberFamilly, generation);
-			setFamillyFiltred([]);
-			setFamillyFiltred(FilterData);
-			window.scroll(0, 0);
-		}*/
     }, [match.params.generation, match.params.numberFamilly]);
     return ( 
         <>
@@ -87,7 +54,7 @@ const Family = ({match}) => {
 				}
 				{
 					famillyFiltred[0].dateMariage === undefined &&
-					<h4 className='text-center mb-4'></h4>
+					<br />
 				}
 				</div>
 			}

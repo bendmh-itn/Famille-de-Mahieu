@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
 import fireBase from '../firebase';
-import {ACTUAL_GENERATION} from "../constant"
+import {ACTUAL_GENERATION} from "../constant";
+import NavBarGeneration from '../Components/navBarGenereation';
 
 
 const Generation3 = () => {
@@ -17,12 +18,10 @@ const Generation3 = () => {
 				const data = querySnapshot.docs.map(doc => doc.data());
 				copyData(data);
                 dataFinal = FilterByGeneration("3");
-                //checkForBirthday(dataFinal);
                 setFamillyFiltred(dataFinal);
 			})
         }else{
             dataFinal = FilterByGeneration("3");
-            //checkForBirthday(dataFinal);
             setFamillyFiltred(dataFinal);
         }
     }, []);
@@ -30,6 +29,9 @@ const Generation3 = () => {
     return ( 
         <>
             <div className="container">
+				<div className="d-block d-sm-block d-md-block d-lg-none">
+					<NavBarGeneration />
+				</div>
 			    <h1 className="text-uppercase text-center">La 3<sup className="text-lowercase">ème</sup> génération</h1>
                 <h3 className="mb-4">Nous sommes {famillyFiltred.length} personnes</h3>
             </div>

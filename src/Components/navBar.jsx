@@ -15,13 +15,20 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/anniversaire" >Annif</NavLink>
+                            <NavLink className="navbar-brand" to="/anniversaire" >Anniversaires</NavLink>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <NavLink className="navbar-brand dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Génération
+                            </NavLink>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <NavLink className="dropdown-item" to="/generation2">Génération 2</NavLink>
+                                <NavLink className="dropdown-item" to="/generation3">Génération 3</NavLink>
+                                <NavLink className="dropdown-item" to="/generation4">Génération 4</NavLink>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/generation3">Génération 3</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/generation4">Génération 4</NavLink>
+                            <NavLink className="navbar-brand" to="/events">Événements</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="navbar-brand" to="/jeu">Jeu</NavLink>

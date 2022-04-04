@@ -4,11 +4,13 @@ import NavBar from "./Components/navBar";
 import UserProvider from "./Components/Providers/UserProvider";
 import HomePage from "./Pages/deMahieu-dessain";
 import AnniversairePage from "./Pages/anniversaire";
+import Generation2 from "./Pages/generation2";
 import Generation3 from "./Pages/generation3";
 import Generation4 from "./Pages/generation4";
 import Jeu from "./Pages/jeu";
 import Profil from "./Pages/profilUser";
 import NavBarMobile from "./Components/navBarMobile";
+import ListeEvenements from "./Pages/listeEvenements";
 
 function App() {
   return (
@@ -24,12 +26,15 @@ function App() {
           <main>
             <div className="container mt-3">
               <Switch>
+                <Route path="/events/:id" component={ListeEvenements} />
+                <Route path="/events" component={ListeEvenements} />
                 <Route
                   path="/:generation/:numberFamilly"
                   component={HomePage}
                 />
                 <Route path="/generation4" component={Generation4} />
                 <Route path="/generation3" component={Generation3} />
+                <Route path="/generation2" component={Generation2} />
                 <Route path="/anniversaire" component={AnniversairePage} />
                 <Route path="/jeu" component={Jeu} />
                 <Route path="/profil" component={Profil} />

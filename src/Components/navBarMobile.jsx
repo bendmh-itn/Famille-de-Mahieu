@@ -11,7 +11,7 @@ const NavBarMobile = () => {
     const location = useLocation();
     useEffect(() => {
         setMenuSelected(location.pathname.substring(1));
-    }, []);
+    }, [location]);
 
     return ( 
         <>
@@ -24,17 +24,17 @@ const NavBarMobile = () => {
                     {menuSelected === "anniversaire" && <ion-icon name="balloon-sharp"></ion-icon>}
                     {menuSelected !== "anniversaire" && <ion-icon name="balloon-outline"></ion-icon>}
                 </NavLink>
-                <NavLink onClick={() => changeMenuSelected("generation3")} className="navbar-brand" to="/generation3">
-                    {menuSelected === "generation3" && <ion-icon name="reorder-three-sharp"></ion-icon>}
-                    {menuSelected !== "generation3" && <ion-icon name="reorder-three-outline"></ion-icon>}
-                </NavLink>
-                <NavLink onClick={() => changeMenuSelected("generation4")} className="navbar-brand" to="/generation4">
-                    {menuSelected === "generation4" && <ion-icon name="reorder-four-sharp"></ion-icon>}
-                    {menuSelected !== "generation4" && <ion-icon name="reorder-four-outline"></ion-icon>}
+                <NavLink onClick={() => changeMenuSelected("generation")} className="navbar-brand" to="/generation2">
+                    {menuSelected.includes("generation") && <ion-icon name="list-sharp"></ion-icon>}
+                    {!menuSelected.includes("generation") && <ion-icon name="list-outline"></ion-icon>}
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("jeu")} className="navbar-brand" to="/jeu">
                     {menuSelected === "jeu" && <ion-icon name="game-controller-sharp"></ion-icon>}
                     {menuSelected !== "jeu" && <ion-icon name="game-controller-outline"></ion-icon>}
+                </NavLink>
+                <NavLink onClick={() => changeMenuSelected("events")} className="navbar-brand" to="/events">
+                    {menuSelected.includes("events") && <ion-icon name="newspaper-sharp"></ion-icon>}
+                    {!menuSelected.includes("events") && <ion-icon name="newspaper-outline"></ion-icon>}
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("profil")} className="navbar-brand" to="/profil">
                     {menuSelected === "profil" && <ion-icon name="person-sharp"></ion-icon>}

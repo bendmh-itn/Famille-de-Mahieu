@@ -56,6 +56,38 @@ function ModifyUserFireBase(id, person, pictureName = "") {
     });
 }
 
+export function AddElementInPhoto(id, pictureName) {
+  return db
+    .collection("evenement")
+    .doc(id)
+    .update({
+      Photos: firebase.firestore.FieldValue.arrayUnion(pictureName),
+    });
+}
+
+export function getEvents() {
+  return db.collection("evenement").orderBy("Date", "desc").get();
+}
+
+function ChangeMessageSended() {
+  return db.collection("anniversaireCheck").doc("X9lvApViIrEGEYRZt2vB").set({
+    send: true,
+  });
+}
+
+function MessageSended() {
+  return db.collection("anniversaireCheck").doc("X9lvApViIrEGEYRZt2vB").get();
+}
+
+export function CreateEvent(data, pictureName) {
+  return db.collection("evenement").add({
+    Titre: data.titre,
+    Photos: [],
+    PhotoEvent: pictureName,
+    Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
+  });
+}
+
 export const storage = firebase.storage();
 
 export const auth = firebase.auth();
@@ -91,6 +123,8 @@ const test = {
   ModifyUserFireBase,
   FindEmailPerson,
   Disconnect,
+  MessageSended,
+  ChangeMessageSended,
 };
 
 export default test;

@@ -42,6 +42,9 @@ table {
   padding-left: 10px;
   padding-left: 20px;
 }
+.space-around {
+  justify-content: space-around;
+}
 
 /*Mettre les images selon la taille de l'écran */
 @media screen and (min-width: 10px) and (max-width: 750px) {
@@ -144,4 +147,10 @@ table {
   90% {
     color: hsl(288, 60%, 40%);
   }
+}
+
+
+.moreSize
+{
+  font-size: 3em;
 }
