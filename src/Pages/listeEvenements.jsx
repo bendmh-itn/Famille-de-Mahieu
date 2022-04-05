@@ -28,7 +28,9 @@ const ListeEvenements = () => {
                 <>
                     <h1 className="text-center mb-3 moreSize">Fil d'actualité</h1>
                     <div className='text-center mb-3'>
-                        <ModalCreateEvent />
+                        {localStorage.getItem("userId") &&
+                            <ModalCreateEvent />
+                        }
                     </div>
                     {
                          events.map((event) => {

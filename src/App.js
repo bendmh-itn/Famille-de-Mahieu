@@ -11,6 +11,7 @@ import Jeu from "./Pages/jeu";
 import Profil from "./Pages/profilUser";
 import NavBarMobile from "./Components/navBarMobile";
 import ListeEvenements from "./Pages/listeEvenements";
+import BarreAjoutEmail from "./Components/barreAjoutEmail";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           <div className="d-block d-sm-block d-md-block d-lg-none">
             <NavBarMobile />
           </div>
+
           <main>
+            {!localStorage.getItem("userId") && <BarreAjoutEmail />}
             <div className="container mt-3">
               <Switch>
                 <Route path="/events/:id" component={ListeEvenements} />
