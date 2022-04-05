@@ -85,6 +85,7 @@ export function CreateEvent(data, pictureName) {
     Photos: [],
     PhotoEvent: pictureName,
     Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
+    Created_By: localStorage.getItem("userId"),
   });
 }
 
@@ -98,12 +99,42 @@ const signInWithGoogle = () => {
     .signInWithPopup(provider)
     .then((result) => {
       const email = result.user.email;
+      PutDataLocalStorage(email);
       localStorage.setItem("email", email);
     })
     .then(() => {
       window.location.reload();
     });
 };
+
+const PutDataLocalStorage = (email) => {
+  db.collection("famille")
+    .where("email", "==", email)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        localStorage.setItem("userId", doc.id);
+        localStorage.setItem("userLastName", doc.data().lastName);
+        localStorage.setItem("userFirstName", doc.data().firstName);
+        localStorage.setItem("userPictureName", doc.data().pictureName);
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+};
+
+export function DeleteEvent(eventId) {
+  db.collection("evenement")
+    .doc(eventId)
+    .delete()
+    .then(() => {
+      window.location.reload(false);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 const Disconnect = () => {
   auth

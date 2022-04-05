@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../App.css';
 import moment from 'moment';
 import { useHistory } from "react-router-dom";
-import { AddElementInPhoto } from '../firebase';
+import { AddElementInPhoto, DeleteEvent } from '../firebase';
 import Compressor from 'compressorjs';
 import { storage } from '../firebase';
 
@@ -90,7 +90,15 @@ const EventFlex = ({event, id=null}) => {
                         </div>
                     }
                     {!id &&
-                        <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                        <div>
+                            <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                            {event.value.Created_By === localStorage.getItem("userId") && 
+                                <div>
+                                    <button className='btn btn-danger mb-3' onClick={() => DeleteEvent(event.id)}>Supprimer</button>
+                                </div>
+                                
+                            }
+                        </div>
                     }
             </div>   
         </>

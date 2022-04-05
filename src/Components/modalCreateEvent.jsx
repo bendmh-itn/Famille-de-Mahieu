@@ -73,14 +73,14 @@ const ModalCreateEvent = () => {
 
     return ( 
         <>
-            <button type="button" className="btn btn-secondary mr-3" data-toggle="modal" data-target="#exampleModalCreate">
+            <button type="button" className="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModalCreate">
                 Créer un événement
             </button>
             <div className="modal fade" id="exampleModalCreate" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Modifier l'équipe</h5>
+                    <h5 className="modal-title" id="exampleModalLabel">Créer l'événement</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,11 +88,11 @@ const ModalCreateEvent = () => {
                 <div className="modal-body">
                     <div className="form-group">
                         <label>Titre de l'événement</label>
-                        <input className="form-control" placeholder="Titre de l'événement" name="titre" onChange={chooseTitle}></input>
+                        <input className="form-control" placeholder="Titre de l'événement" name="titre" onChange={chooseTitle} required></input>
                     </div>
                     <div className="form-group">
                         <label>Date de l'événement</label>
-                        <input className="form-control" type="date" name="date" onChange={chooseDate}></input>
+                        <input className="form-control" type="date" name="date" onChange={chooseDate} required></input>
                     </div>
                     <div className="form-group">
                         <label className='mb-2'>Ajouter une image</label>
