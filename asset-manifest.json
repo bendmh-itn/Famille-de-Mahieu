@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Famille-de-Mahieu/static/css/main.a0c7d466.chunk.css",
-    "main.js": "/Famille-de-Mahieu/static/js/main.4894eec8.chunk.js",
-    "main.js.map": "/Famille-de-Mahieu/static/js/main.4894eec8.chunk.js.map",
+    "main.js": "/Famille-de-Mahieu/static/js/main.f872fa5b.chunk.js",
+    "main.js.map": "/Famille-de-Mahieu/static/js/main.f872fa5b.chunk.js.map",
     "runtime-main.js": "/Famille-de-Mahieu/static/js/runtime-main.e267c0d3.js",
     "runtime-main.js.map": "/Famille-de-Mahieu/static/js/runtime-main.e267c0d3.js.map",
     "static/js/2.49f7821c.chunk.js": "/Famille-de-Mahieu/static/js/2.49f7821c.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.e267c0d3.js",
     "static/js/2.49f7821c.chunk.js",
     "static/css/main.a0c7d466.chunk.css",
-    "static/js/main.4894eec8.chunk.js"
+    "static/js/main.f872fa5b.chunk.js"
   ]
 }
