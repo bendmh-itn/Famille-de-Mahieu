@@ -10,6 +10,7 @@ const ListeEvenements = () => {
     const [events, setEvents] = useState([]);
     const {id} = useParams();
     const [className, setClassName] = useState("d-none");
+    const [userId, setUserId] = useState();
 	
     useEffect(() => {
         const userId = getUserData().id;
@@ -19,10 +20,11 @@ const ListeEvenements = () => {
                     setClassName("d-none")
                 }else {
                     setClassName("d-block");
-                }
+                    setUserId(result.id);                }
             });
         }else {
             setClassName("d-block");
+            setUserId(userId);
         }
         getEvents().then((querySnapshot) => {
             let data = [];
@@ -47,7 +49,7 @@ const ListeEvenements = () => {
                     {
                          events.map((event) => {
                             return(
-                                <EventFlex key={event.id} event={event} />
+                                <EventFlex key={event.id} event={event} userId={userId} />
                             )
                         })
                     }

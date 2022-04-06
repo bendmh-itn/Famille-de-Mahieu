@@ -6,7 +6,7 @@ import { AddElementInPhoto, DeleteEvent } from '../firebase';
 import Compressor from 'compressorjs';
 import { storage } from '../firebase';
 
-const EventFlex = ({event, id=null}) => {
+const EventFlex = ({event, id=null, userId=null}) => {
     const [pictures, setPictures] = useState([]);
     const history = useHistory();
     const [className, setClassName] = useState("d-none");
@@ -92,7 +92,7 @@ const EventFlex = ({event, id=null}) => {
                     {!id &&
                         <div>
                             <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
-                            {event.value.Created_By === localStorage.getItem("userId") && 
+                            {event.value.Created_By === userId && 
                                 <div>
                                     <button className='btn btn-danger mb-3' onClick={() => DeleteEvent(event.id)}>Supprimer</button>
                                 </div>
