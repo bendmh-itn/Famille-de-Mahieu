@@ -26,8 +26,7 @@ function App() {
           </div>
 
           <main>
-            {console.log(localStorage.getItem("userId"))}
-            {localStorage.getItem("userId") === null && <BarreAjoutEmail />}
+            <BarreAjoutEmail />
             <div className="container mt-3">
               <Switch>
                 <Route path="/events/:id" component={ListeEvenements} />

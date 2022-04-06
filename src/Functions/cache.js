@@ -1,19 +1,11 @@
-const cache = {};
+var userData = {};
 
-function set(key, data) {
-  cache[key] = {
-    data,
-    cachedAt: new Date().getTime(),
-  };
-}
+export const getUserData = () => {
+  return userData;
+};
 
-function get(key) {
-  return new Promise((resolve) => {
-    resolve(cache[key] ? cache[key] : null);
-  });
-}
-
-export default {
-  set,
-  get,
+export const copyUserData = (id, data) => {
+  userData = {};
+  userData.id = id;
+  userData.data = data;
 };

@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import { copyUserData } from "./Functions/cache";
 
 const provider = new firebase.auth.GoogleAuthProvider();
 var firebaseApp;
@@ -99,7 +100,6 @@ const signInWithGoogle = () => {
     .signInWithPopup(provider)
     .then((result) => {
       const email = result.user.email;
-      PutDataLocalStorage(email);
       localStorage.setItem("email", email);
     })
     .then(() => {
@@ -107,17 +107,19 @@ const signInWithGoogle = () => {
     });
 };
 
-const PutDataLocalStorage = (email) => {
-  db.collection("famille")
+export const PutDataLocalStorage = async (email) => {
+  let userData = {};
+  return await db
+    .collection("famille")
     .where("email", "==", email)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        localStorage.setItem("userId", doc.id);
-        localStorage.setItem("userLastName", doc.data().lastName);
-        localStorage.setItem("userFirstName", doc.data().firstName);
-        localStorage.setItem("userPictureName", doc.data().pictureName);
+        userData.id = doc.id;
+        userData.data = doc.data();
+        copyUserData(doc.id, doc.data());
       });
+      return userData;
     })
     .catch((error) => {
       console.log("Error getting documents: ", error);
