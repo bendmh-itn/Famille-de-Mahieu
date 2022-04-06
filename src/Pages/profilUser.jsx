@@ -3,7 +3,7 @@ import '../App.css';
 import fireBase from '../firebase';
 import { storage } from '../firebase';
 import {UserContext} from '../Components/Providers/UserProvider';
-import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions, addEmail } from '../Functions/FilterData';
+import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, ChildrenInOptions } from '../Functions/FilterData';
 import SelectPerson from '../Components/selectModifyPerson';
 import { getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
@@ -16,7 +16,7 @@ const ConfirmEmail = () => {
     const [id, setId] = useState("");
     const [picture, setPicture] = useState("");
     //const [description, setDescription] = useState("");
-    const [confirmedAccount, setConfirmedAccount] = useState(false);
+    const [confirmedAccount, setConfirmedAccount] = useState(true);
     const [pictureChanged, setPictureChanged] = useState(false);
     const [myClass, setMyClass] = useState("backCard");
     const [dataCharged, setDataCharged] = useState("");
@@ -29,13 +29,11 @@ const ConfirmEmail = () => {
         personSelect.email = emailUser;
         fireBase.ModifyUserFireBase(id, personSelect).then(() => {
             setMessage("Votre adresse a bien été ajoutée.");
+            window.location.reload();
           })
           .catch((error) => {
             setMessage("Error writing document: " + error);
           });
-          addEmail(personSelect.numberFamilly, emailUser);
-          setConfirmedAccount(true);
-          setMyClass("frontCard");
     }
 
     const handleCompressedUpload = (e) => {
@@ -118,23 +116,52 @@ const ConfirmEmail = () => {
     };
     
     useEffect(() => {
+        const ChargeData = () => {
+            let userMail;
+            if(value !== null){
+                userMail = value.email;
+                setEmailUser(value.email);
+                fireBase.FindEmailPerson(userMail)
+                .then(querySnapshot => {
+                    const data = querySnapshot.docs.map(doc => doc.id);
+                    if(data[0] !== undefined){
+                        setId(data[0]);
+                        setConfirmedAccount(true);
+                        const person = FindOnePersonByEmail(userMail);
+                        if(person !== undefined){
+                            setPersonSelect(person);
+                            setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
+                        }
+                        setDataCharged(value);
+                    }else {
+                        setOptions(AllDataInOptions());
+                        setConfirmedAccount(false);
+                        setDataCharged(value);
+                    }
+                });
+            }
+        }
+
         let dataStored = getData();
         if(dataStored.length === 0){
             fireBase.findAll()
 			.then(querySnapshot => {
 				const data = querySnapshot.docs.map(doc => doc.data());
 				copyData(data);
-                setDataCharged(data);
+                ChargeData();
 			})
+        }else{
+            ChargeData();
         }
-        let userMail;
+
+        
+        /*let userMail;
         if(value !== null){
-            setDataCharged(value);
             userMail = value.email;
             setEmailUser(value.email);
             setOptions(AllDataInOptions());
         }
-        if(!confirmedAccount && dataCharged !== ""){
+        if(confirmedAccount && dataCharged !== ""){
             fireBase.FindEmailPerson(userMail)
             .then(querySnapshot => {
                 const data = querySnapshot.docs.map(doc => doc.id);
@@ -153,10 +180,12 @@ const ConfirmEmail = () => {
             const person = FindOnePersonByEmail(userMail);
             if(person !== undefined){
                 setPersonSelect(person);
-                setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
+                setOptions(ChildrenInOptions(person.numberFamilly, person.generation));
+                setConfirmedAccount(true);
+                setDataCharged(value);
             }
-        }
-    },[dataCharged, confirmedAccount, value]);
+        }*/
+    },[value]);
 
     return ( 
         <>
@@ -168,7 +197,7 @@ const ConfirmEmail = () => {
                 </div>
             }
             {
-                emailUser !== "" && !confirmedAccount &&
+                dataCharged !== "" && !confirmedAccount &&
                 <div>
                     <p>Votre adresse mail : <span className='email'>{emailUser}</span></p>
                     <p>Ce sera votre adresse pour modifier vos données</p>
@@ -188,7 +217,7 @@ const ConfirmEmail = () => {
                 </div>
             }
             {
-                confirmedAccount &&
+                dataCharged !== "" && confirmedAccount &&
                 <div>
                     <h2>Votre profil</h2>
                     <div className="form-group">

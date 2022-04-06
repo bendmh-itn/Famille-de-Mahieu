@@ -19,7 +19,7 @@ const BarreAjoutEmail = () => {
     return ( 
         <>
             <div className={"alert alert-warning myAlert " + className } role="alert">
-                <p>Tu n'a pas encore été validé ton compte. Suis ce lien pour le faire : <NavLink to="/profil">Lien</NavLink></p>
+                <p>Tu n'a pas encore validé ton compte. Suis ce <NavLink to="/profil">Lien</NavLink> pour le faire</p>
             </div>
         </>
      );
