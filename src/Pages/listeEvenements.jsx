@@ -16,11 +16,12 @@ const ListeEvenements = () => {
         const userId = getUserData().id;
         if(userId === undefined){
             PutDataLocalStorage(localStorage.getItem("email")).then((result) => {
-                if(result && result.id === undefined){
+                if(result === undefined || result.id === undefined){
                     setClassName("d-none")
                 }else {
                     setClassName("d-block");
-                    setUserId(result.id);                }
+                    setUserId(result.id);                
+                }
             });
         }else {
             setClassName("d-block");

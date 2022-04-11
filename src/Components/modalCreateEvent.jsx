@@ -45,7 +45,6 @@ const ModalCreateEvent = () => {
       };
 
     const getData = () => {
-        //console.log(data);
         let picture = data.pictureName;
         const uploadTask = storage.ref(`images/${picture.name}`).put(picture);
             uploadTask.on(

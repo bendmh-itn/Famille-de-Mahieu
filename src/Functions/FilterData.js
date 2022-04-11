@@ -103,6 +103,10 @@ export const FindOnePersonByEmail = (email) => {
   return filteredData[0];
 };
 
+/**
+ * Cette permet de créer des options pour une liste déroulante en évitant la génération 1 et actuelle
+ * @returns array
+ */
 export const AllDataInOptions = () => {
   var options = [];
   allData
@@ -148,6 +152,10 @@ function trieArrayByBirthdate(a, b) {
   return 0;
 }
 
+/**
+ * Cette fonction permet de renvoyer les personnes qui sont né durant le mois actuel. C'est pour afficher les anniversaires
+ * @returns array
+ */
 export const MoisPersons = () => {
   let data = [];
   const now = new Date();
@@ -164,6 +172,11 @@ export const MoisPersons = () => {
   return data;
 };
 
+/**
+ * Cette fonction permet de récupérer uniquement les personnes d'une certaine génération. De plus il trie ce tableau par date de naissance
+ * @param {correspond à la generation demandée} e
+ * @returns array
+ */
 export const FilterByGeneration = (e) => {
   let data = [];
   allData.forEach((element) => {
@@ -175,20 +188,20 @@ export const FilterByGeneration = (e) => {
   return data;
 };
 
-const FilterByPicture = (e) => {
-  let data = [];
-  allData.forEach((element) => {
-    if (
+/**
+ * Cette fonction permet de filtrer pour éviter les personnes qui n'ont pas de photo de profil
+ * @returns array
+ */
+const FilterByPicture = () => {
+  const data = allData.filter(
+    (element) =>
       element.pictureName !==
         "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fnaruto-g5ac97839f_640.png?alt=media&token=89f220af-2915-4dcc-9fd7-6e69de09fe7c" &&
       element.pictureName !==
         "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Fhomme.PNG?alt=media&token=e9014335-a2b9-48a8-9732-f9997269b515" &&
       element.pictureName !==
         "https://firebasestorage.googleapis.com/v0/b/demahieu-file.appspot.com/o/images%2Ffemme.PNG?alt=media&token=1e2723b0-31a3-44de-a503-d2d7c0694e88"
-    ) {
-      data.push(element);
-    }
-  });
+  );
   return data;
 };
 

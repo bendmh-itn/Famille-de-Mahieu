@@ -28,10 +28,10 @@ const NavBar = () => {
                             </div>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/events">Événements</NavLink>
+                            <NavLink className="navbar-brand" to="/jeu">Jeu</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/jeu">Jeu</NavLink>
+                            <NavLink className="navbar-brand" to="/events">Événements</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="navbar-brand" to="/profil">Profil</NavLink>

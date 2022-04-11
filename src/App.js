@@ -12,6 +12,7 @@ import Profil from "./Pages/profilUser";
 import NavBarMobile from "./Components/navBarMobile";
 import ListeEvenements from "./Pages/listeEvenements";
 import BarreAjoutEmail from "./Components/barreAjoutEmail";
+import BarreSeConnecter from "./Components/barreSeConnecter";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
           <main>
             <BarreAjoutEmail />
+            <BarreSeConnecter />
             <div className="container mt-3">
               <Switch>
                 <Route path="/events/:id" component={ListeEvenements} />
