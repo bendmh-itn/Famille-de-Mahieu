@@ -4,7 +4,7 @@ import { CreateEvent } from '../firebase';
 import { storage } from '../firebase';
 
 
-const ModalCreateEvent = () => {
+const ModalCreateEvent = ({userId}) => {
     const [data, setData] = useState([]);
 
     const chooseTitle = (e) => {
@@ -59,7 +59,7 @@ const ModalCreateEvent = () => {
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
-                            CreateEvent(data, pictureName).then(() => {
+                            CreateEvent(data, pictureName, userId).then(() => {
                                 window.location.reload(false);
                                 })
                                 .catch((error) => {

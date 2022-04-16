@@ -45,7 +45,9 @@ const ListeEvenements = () => {
                 <>
                     <h1 className="text-center mb-3 moreSize">Fil d'actualité</h1>
                     <div className={'text-center mb-3 ' + className }>
-                        <ModalCreateEvent />
+                        <ModalCreateEvent
+                            userId={userId}
+                        />
                     </div>
                     {
                          events.map((event) => {

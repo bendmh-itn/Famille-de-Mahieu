@@ -37,7 +37,7 @@ function FindEmailPerson(email) {
   return db.collection("famille").where("email", "==", email).get();
 }
 
-//Cette fonction permet de supprimer la photo du storage 
+//Cette fonction permet de supprimer la photo du storage
 export function getRefPicture(url) {
   //let ref = firebase.storage().refFromURL(url).delete();
 }
@@ -89,13 +89,13 @@ function MessageSended() {
   return db.collection("anniversaireCheck").doc("X9lvApViIrEGEYRZt2vB").get();
 }
 
-export function CreateEvent(data, pictureName) {
+export function CreateEvent(data, pictureName, userId) {
   return db.collection("evenement").add({
     Titre: data.titre,
     Photos: [],
     PhotoEvent: pictureName,
     Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
-    Created_By: localStorage.getItem("userId"),
+    Created_By: userId,
   });
 }
 
