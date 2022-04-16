@@ -7,6 +7,7 @@ import { AllDataInOptions, FindOnePersonByNumberFamilly, FindOnePersonByEmail, C
 import SelectPerson from '../Components/selectModifyPerson';
 import { getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
+import ControlledCarousel from '../Components/CarouselBootstrap'
 
 const ConfirmEmail = () => {
 
@@ -15,7 +16,6 @@ const ConfirmEmail = () => {
     const [message, setMessage] = useState("");
     const [id, setId] = useState("");
     const [picture, setPicture] = useState("");
-    //const [description, setDescription] = useState("");
     const [confirmedAccount, setConfirmedAccount] = useState(true);
     const [pictureChanged, setPictureChanged] = useState(false);
     const [myClass, setMyClass] = useState("backCard");
@@ -95,7 +95,7 @@ const ConfirmEmail = () => {
                         .getDownloadURL()
                         .then(pictureName => {
                             fireBase.ModifyUserFireBase(id, personSelect, pictureName).then(() => {
-                                setMessage("Vos données ont bien été modifiées");
+                                    setMessage("Vos données ont bien été modifiées");
                                 })
                                 .catch((error) => {
                                 setMessage("Error writing document: " + error);
@@ -153,38 +153,6 @@ const ConfirmEmail = () => {
         }else{
             ChargeData();
         }
-
-        
-        /*let userMail;
-        if(value !== null){
-            userMail = value.email;
-            setEmailUser(value.email);
-            setOptions(AllDataInOptions());
-        }
-        if(confirmedAccount && dataCharged !== ""){
-            fireBase.FindEmailPerson(userMail)
-            .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc => doc.id);
-                if(data[0] !== undefined){
-                    setId(data[0]);
-                    setConfirmedAccount(true);
-                    const person = FindOnePersonByEmail(userMail);
-                    if(person !== undefined){
-                        setPersonSelect(person);
-                        setOptions(ChildrenInOptions(person.numberFamilly, person.generation))
-                    }
-                }
-            });
-        }
-        if(confirmedAccount){
-            const person = FindOnePersonByEmail(userMail);
-            if(person !== undefined){
-                setPersonSelect(person);
-                setOptions(ChildrenInOptions(person.numberFamilly, person.generation));
-                setConfirmedAccount(true);
-                setDataCharged(value);
-            }
-        }*/
     },[value]);
 
     return ( 
@@ -240,10 +208,6 @@ const ConfirmEmail = () => {
                         <label>Email</label>
                         <input className="form-control" name='email' value={personSelect.email === undefined ? "" : personSelect.email} placeholder="Email..." onChange={handleChange}/>
                     </div>
-                    {/*<div className="form-group">
-                        <label>Description</label>
-                        <textarea className="form-control" value={description} placeholder="Votre description..." onChange={e => setDescription(e.target.value)}/>
-                    </div>*/}
                     <div className="form-group">
                         <label>Image profil</label>
                         <input className="form-control" name='pictureName' type="file" onChange={handleCompressedUpload} />
@@ -264,6 +228,15 @@ const ConfirmEmail = () => {
                                 isClearable={false}
                             />
                         </div>
+                    }
+                    {
+                        personSelect.PhotosHistory && 
+                        <>
+                            <h2 className='mt-4'>Votre historique photo</h2>
+                            <ControlledCarousel 
+                                person={personSelect}
+                            />
+                        </>
                     }
                 </div>
             }

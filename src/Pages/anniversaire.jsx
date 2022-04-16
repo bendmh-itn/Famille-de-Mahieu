@@ -92,13 +92,9 @@ const Anniversaire = () => {
                     famillyFiltred
 					.map((person) => {
 					return <TrombinoscopeFlex
+                        person={person}
 						key={person.firstName + "" + person.famillyName}
-						lienImage={person.pictureName}
-						prenomNom={person.firstName + " " + person.lastName}
-						dateDeNaissance= {person.birthDate}
-						dateDeces={person.deathDate}
 						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
-						generation={person.generation}
                         myBirthday={person.birthDate.split("/")[0] === (day.toString() < 10 ? "0" + day.toString() : day.toString()) ? true : false}
 					/>
 					}

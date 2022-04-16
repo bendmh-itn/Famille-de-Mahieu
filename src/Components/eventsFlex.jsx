@@ -16,7 +16,6 @@ const EventFlex = ({event, id=null, userId=null}) => {
         let imagesCompress = [];
         for(var i = 0; i < images.length; i++){
             let image = images[i];
-            console.log(image);
             new Compressor(image, {
                 quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
                 success: (compressedResult) => {
@@ -55,6 +54,13 @@ const EventFlex = ({event, id=null, userId=null}) => {
         });
     }
 
+    const ConfirmDelete = (id) => {
+        var res = window.confirm("Êtes-vous sûr de vouloir supprimer?");
+        if(res) {
+            DeleteEvent(id);
+        }
+    }
+
 
     return ( 
         <>
@@ -67,7 +73,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                             <div className="row mb-4">
                                 <div className="col-sm">
                                 <div className="form-group mt-2">
-                                    <label className='mb-2'>Ajouter une image</label>
+                                    <label className='mb-2'>Ajouter des images</label>
                                     <input className="form-control" name='pictureName' type="file" multiple onChange={handleCompressedUpload} />
                                 </div>
                                 </div>
@@ -94,7 +100,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                             <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
                             {event.value.Created_By === userId && 
                                 <div>
-                                    <button className='btn btn-danger mb-3' onClick={() => DeleteEvent(event.id)}>Supprimer</button>
+                                    <button className='btn btn-danger mb-3' onClick={() => ConfirmDelete(event.id)}>Supprimer</button>
                                 </div>
                                 
                             }

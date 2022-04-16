@@ -39,13 +39,10 @@ const Generation4 = () => {
 				famillyFiltred
 					.map((person) => {
 					return <TrombinoscopeFlex
+						person={person}
 						key={person.firstName + "" + person.famillyName}
-						lienImage={person.pictureName}
-						prenomNom={person.firstName + " " + person.lastName}
-						dateDeNaissance= {person.birthDate}
 						dateDeces={person.deathDate}
 						link={"/3/" + Math.round(person.numberFamilly/10) }
-						generation={person.generation}  
 					/>
 					}
 				
