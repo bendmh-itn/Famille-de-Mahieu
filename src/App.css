@@ -154,3 +154,20 @@ table {
 {
   font-size: 3em;
 }
+
+.myIcon {
+  background-color: whitesmoke;
+  border-radius: 45px;
+  margin: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.float {
+  text-align: center;
+}
+
+/* Ces lignes permettent d'enlever le control sur le carousel.
+.myCarousel .carousel-control-next-icon, .myCarousel .carousel-control-prev-icon {
+  display: none;
+}*/

@@ -76,6 +76,7 @@ const ConfirmEmail = () => {
         if(!pictureChanged){
             fireBase.ModifyUserFireBase(id, personSelect).then(() => {
                 setMessage("Vos données ont bien été modifiées");
+                window.location.reload(false);
               })
               .catch((error) => {
                 setMessage("Error writing document: " + error);
@@ -96,6 +97,7 @@ const ConfirmEmail = () => {
                         .then(pictureName => {
                             fireBase.ModifyUserFireBase(id, personSelect, pictureName).then(() => {
                                     setMessage("Vos données ont bien été modifiées");
+                                    window.location.reload(false);
                                 })
                                 .catch((error) => {
                                 setMessage("Error writing document: " + error);
@@ -232,9 +234,10 @@ const ConfirmEmail = () => {
                     {
                         personSelect.PhotosHistory && 
                         <>
-                            <h2 className='mt-4'>Votre historique photo</h2>
+                            <h2 className='mt-4 mb-0'>Votre historique photo</h2>
                             <ControlledCarousel 
                                 person={personSelect}
+                                id={id}
                             />
                         </>
                     }

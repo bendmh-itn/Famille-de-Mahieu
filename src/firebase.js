@@ -37,9 +37,24 @@ function FindEmailPerson(email) {
   return db.collection("famille").where("email", "==", email).get();
 }
 
-//Cette fonction permet de supprimer la photo du storage
-export function getRefPicture(url) {
-  //let ref = firebase.storage().refFromURL(url).delete();
+//Cette fonction permet de supprimer la photo du storage et de l'historique de la personne
+export function getRefPicture(url, id) {
+  return db
+    .collection("famille")
+    .doc(id)
+    .update({
+      PhotosHistory: firebase.firestore.FieldValue.arrayRemove(url),
+    })
+    .then(() => {
+      firebase.storage().refFromURL(url).delete();
+    });
+}
+
+//Cette fonction permet de changer la photo de profil parmis celle dans le tableau de la personne.
+export function changePictureProfil(id, pictureName) {
+  return db.collection("famille").doc(id).update({
+    pictureName: pictureName,
+  });
 }
 
 function ModifyUserFireBase(id, person, pictureName = "") {
