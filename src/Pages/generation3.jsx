@@ -3,7 +3,7 @@ import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
 import fireBase from '../firebase';
 import {ACTUAL_GENERATION} from "../constant";
-import NavBarGeneration from '../Components/navBarGenereation';
+import NavBarGeneration from '../Components/navBar/navBarGenereation';
 
 
 const Generation3 = () => {

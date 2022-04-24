@@ -63,6 +63,10 @@ table {
   img {
     height: 300px;
   }
+  .pictureAdmin {
+    width: 150px;
+    height: auto;
+  }
   .elementFlexibleCustom {
     text-align: center;
     flex-grow: 1;

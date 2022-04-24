@@ -1,6 +1,6 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import NavBar from "./Components/navBar";
+import NavBar from "./Components/navBar/navBar";
 import UserProvider from "./Components/Providers/UserProvider";
 import HomePage from "./Pages/deMahieu-dessain";
 import AnniversairePage from "./Pages/anniversaire";
@@ -9,10 +9,12 @@ import Generation3 from "./Pages/generation3";
 import Generation4 from "./Pages/generation4";
 import Jeu from "./Pages/jeu";
 import Profil from "./Pages/profilUser";
-import NavBarMobile from "./Components/navBarMobile";
+import NavBarMobile from "./Components/navBar/navBarMobile";
 import ListeEvenements from "./Pages/listeEvenements";
 import BarreAjoutEmail from "./Components/barreAjoutEmail";
 import BarreSeConnecter from "./Components/barreSeConnecter";
+import adminCreateUser from "./Pages/admin/adminCreateUser";
+import AdminGestionPicture from "./Pages/admin/adminGestionPicture";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <BarreSeConnecter />
             <div className="container mt-3">
               <Switch>
+                <Route path="/admin/users" component={adminCreateUser} />
+                <Route path="/admin/pictures" component={AdminGestionPicture} />
                 <Route path="/events/:id" component={ListeEvenements} />
                 <Route path="/events" component={ListeEvenements} />
                 <Route

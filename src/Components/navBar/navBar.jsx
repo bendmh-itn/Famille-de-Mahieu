@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import Firebase from "../firebase";
+import Firebase from "../../firebase";
 
 const NavBar = () => {
     return ( 

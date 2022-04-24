@@ -126,6 +126,21 @@ export const AllDataInOptions = () => {
   return options;
 };
 
+/**
+ * Cette permet de créer des options pour une liste déroulante de tous les utilisateurs
+ * @returns array
+ */
+export const AllDataInOptionsNoException = () => {
+  var options = [];
+  allData.map((element) => {
+    return options.push({
+      value: element.generation + "/" + element.numberFamilly,
+      label: element.firstName + " " + element.lastName,
+    });
+  });
+  return options;
+};
+
 function trieArray(a, b) {
   let anneeA = a.birthDate.split("/")[2];
   let anneeB = b.birthDate.split("/")[2];

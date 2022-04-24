@@ -38,8 +38,8 @@ function FindEmailPerson(email) {
 }
 
 //Cette fonction permet de supprimer la photo du storage et de l'historique de la personne
-export function getRefPicture(url, id) {
-  return db
+export async function getRefPicture(url, id) {
+  return await db
     .collection("famille")
     .doc(id)
     .update({
@@ -48,6 +48,10 @@ export function getRefPicture(url, id) {
     .then(() => {
       firebase.storage().refFromURL(url).delete();
     });
+}
+
+export async function deletePicture(url) {
+  return await firebase.storage().refFromURL(url).delete();
 }
 
 //Cette fonction permet de changer la photo de profil parmis celle dans le tableau de la personne.
@@ -94,16 +98,6 @@ export function getEvents() {
   return db.collection("evenement").orderBy("Date", "desc").get();
 }
 
-function ChangeMessageSended() {
-  return db.collection("anniversaireCheck").doc("X9lvApViIrEGEYRZt2vB").set({
-    send: true,
-  });
-}
-
-function MessageSended() {
-  return db.collection("anniversaireCheck").doc("X9lvApViIrEGEYRZt2vB").get();
-}
-
 export function CreateEvent(data, pictureName, userId) {
   return db.collection("evenement").add({
     Titre: data.titre,
@@ -111,6 +105,22 @@ export function CreateEvent(data, pictureName, userId) {
     PhotoEvent: pictureName,
     Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
     Created_By: userId,
+  });
+}
+
+export function CreateUserFireBase(person, pictureName = "") {
+  console.log(person);
+  console.log(pictureName);
+  return db.collection("test").add({
+    firstName: person.firstName,
+    lastName: person.lastName,
+    generation: person.generation,
+    birthDate: person.birthDate,
+    numberFamilly: person.numberFamilly,
+    pictureName: pictureName,
+    PhotosHistory: firebase.firestore.FieldValue.arrayUnion(pictureName),
+    famillyName: person.famillyName,
+    dateMariage: person.dateMariage,
   });
 }
 
@@ -180,8 +190,6 @@ const test = {
   ModifyUserFireBase,
   FindEmailPerson,
   Disconnect,
-  MessageSended,
-  ChangeMessageSended,
 };
 
 export default test;

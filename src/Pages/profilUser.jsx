@@ -9,6 +9,8 @@ import { getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
 import ControlledCarousel from '../Components/CarouselBootstrap'
 import SpinnerBootstrap from '../Components/spinnerBootstrap';
+import { ACTUAL_GENERATION } from '../constant';
+import { NavLink } from "react-router-dom";
 
 const ConfirmEmail = () => {
 
@@ -58,6 +60,7 @@ const ConfirmEmail = () => {
       };
 
     const modifyPersonSelect = (e) => {
+        window.scroll(0,0);
         if(e !== null){
             let numberFamilly = e.split('/')[1];
             const person = FindOnePersonByNumberFamilly(numberFamilly);
@@ -193,10 +196,17 @@ const ConfirmEmail = () => {
                 dataCharged !== "" && confirmedAccount &&
                 <div>
                     <h2>Votre profil</h2>
-                    <div className="form-group">
-                        <label>Date de mariage</label>
-                        <input className="form-control" name='dateMariage' value={personSelect.dateMariage || ''} placeholder="Date de mariage" onChange={handleChange}/>
-                    </div>
+                    {
+                        personSelect.status === "admin" && 
+                        <NavLink className="navbar-brand" to="/admin/users"><button className='btn btn-info text-white'>Admin</button></NavLink>
+                    }
+                    {
+                        personSelect.generation !== ACTUAL_GENERATION &&
+                        <div className="form-group">
+                            <label>Date de mariage</label>
+                            <input className="form-control" name='dateMariage' value={personSelect.dateMariage || ''} placeholder="Date de mariage" onChange={handleChange}/>
+                        </div>
+                    }
                     <div className="form-group">
                         <label>Nom</label>
                         <input className="form-control" name='lastName' value={personSelect.lastName || ''} placeholder="Nom..." onChange={handleChange}/>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { NavLink, useLocation } from "react-router-dom";
-import Firebase from "../firebase";
+import Firebase from "../../firebase";
 
 const NavBarMobile = () => {
     const [menuSelected, setMenuSelected] = useState("");
