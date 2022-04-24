@@ -34,7 +34,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
         setLoading(true);
         var counter = pictures.length-1;
         pictures.forEach(picture => {
-            const uploadTask = storage.ref(`images/${picture.name}`).put(picture);
+            const uploadTask = storage.ref(`evenements/${picture.name}`).put(picture);
             uploadTask.on(
                 "state_changed",
                 snapshot => {},
@@ -43,7 +43,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                 },
                 () => {
                     storage
-                        .ref("images")
+                        .ref("evenements")
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {

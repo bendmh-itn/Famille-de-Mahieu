@@ -2,10 +2,12 @@ import React, { useState} from 'react';
 import Compressor from 'compressorjs';
 import { CreateEvent } from '../firebase';
 import { storage } from '../firebase';
+import SpinnerBootstrap from './spinnerBootstrap';
 
 
 const ModalCreateEvent = ({userId}) => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const chooseTitle = (e) => {
         if(e!== null){
@@ -45,8 +47,9 @@ const ModalCreateEvent = ({userId}) => {
       };
 
     const getData = () => {
+        setLoading(true);
         let picture = data.pictureName;
-        const uploadTask = storage.ref(`images/${picture.name}`).put(picture);
+        const uploadTask = storage.ref(`evenements/${picture.name}`).put(picture);
             uploadTask.on(
                 "state_changed",
                 snapshot => {},
@@ -55,7 +58,7 @@ const ModalCreateEvent = ({userId}) => {
                 },
                 () => {
                     storage
-                        .ref("images")
+                        .ref("evenements")
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
@@ -72,9 +75,18 @@ const ModalCreateEvent = ({userId}) => {
 
     return ( 
         <>
-            <button type="button" className="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModalCreate">
-                Créer un événement
-            </button>
+            {
+                loading && 
+                <div className='mb-3'>
+                    <SpinnerBootstrap />
+                </div>
+            }
+            {
+                !loading &&
+                <button type="button" className="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModalCreate">
+                    Créer un événement
+                </button>
+            }
             <div className="modal fade" id="exampleModalCreate" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
