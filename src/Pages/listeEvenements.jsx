@@ -13,6 +13,7 @@ const ListeEvenements = () => {
     const [userId, setUserId] = useState();
 	
     useEffect(() => {
+        window.scroll(0, 0);
         const userId = getUserData().id;
         if(userId === undefined){
             PutDataLocalStorage(localStorage.getItem("email")).then((result) => {
@@ -37,7 +38,7 @@ const ListeEvenements = () => {
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-    }, []);
+    }, [id]);
 
     return ( 
         <>

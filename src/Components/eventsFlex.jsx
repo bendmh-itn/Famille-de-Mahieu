@@ -5,11 +5,13 @@ import { useHistory } from "react-router-dom";
 import { AddElementInPhoto, DeleteEvent } from '../firebase';
 import Compressor from 'compressorjs';
 import { storage } from '../firebase';
+import SpinnerBootstrap from './spinnerBootstrap';
 
 const EventFlex = ({event, id=null, userId=null}) => {
     const [pictures, setPictures] = useState([]);
     const history = useHistory();
-    const [className, setClassName] = useState("d-none");
+    const [className, setClassName] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleCompressedUpload = (e) => {
         const images = e.target.files;
@@ -24,10 +26,12 @@ const EventFlex = ({event, id=null, userId=null}) => {
             });
         }
         setPictures(imagesCompress);
-        setClassName("d-block")
+        setClassName(true);
       };
 
     const sendPicture = () => {
+        setClassName(false);
+        setLoading(true);
         var counter = pictures.length-1;
         pictures.forEach(picture => {
             const uploadTask = storage.ref(`images/${picture.name}`).put(picture);
@@ -71,18 +75,30 @@ const EventFlex = ({event, id=null, userId=null}) => {
                     {id && 
                         <div>
                             <img src={event.value.PhotoEvent} alt={event.value.Titre} />
-                            <div className="row mb-4">
-                                <div className="col-sm">
-                                <div className="form-group mt-2">
-                                    <label className='mb-2'>Ajouter des images</label>
-                                    <input className="form-control" name='pictureName' type="file" multiple onChange={handleCompressedUpload} />
-                                </div>
-                                </div>
-                                <div className="col-sm">
-                                    <button className={'btn btn-primary mt-4 mb-3 ' + className} onClick={sendPicture}>
-                                        Ajouter les images
-                                    </button>
-                                </div>
+                            <div className="row align-items-center mb-4">
+                                {
+                                    !loading && 
+                                    <div className="col-sm">
+                                        <div className="form-group mt-2">
+                                            <label className='mb-2'>Ajouter des images</label>
+                                            <input className="form-control" name='pictureName' type="file" multiple onChange={handleCompressedUpload} />
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    className && 
+                                    <div className="col-sm">
+                                        <button className='btn btn-primary mt-4 mb-3' onClick={sendPicture}>
+                                            Ajouter les images
+                                        </button>
+                                    </div>
+                                }
+                                {
+                                    loading && 
+                                    <div className="col-sm mt-4">
+                                        <SpinnerBootstrap />
+                                    </div>
+                                }
                             </div>
                             <h4>Les photos de l'event</h4>
                             {

@@ -8,6 +8,7 @@ import SelectPerson from '../Components/selectModifyPerson';
 import { getData, copyData } from '../Functions/FilterData';
 import Compressor from 'compressorjs';
 import ControlledCarousel from '../Components/CarouselBootstrap'
+import SpinnerBootstrap from '../Components/spinnerBootstrap';
 
 const ConfirmEmail = () => {
 
@@ -21,6 +22,7 @@ const ConfirmEmail = () => {
     const [myClass, setMyClass] = useState("backCard");
     const [dataCharged, setDataCharged] = useState("");
     const [personSelect, setPersonSelect] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     
     const value = useContext(UserContext);
@@ -73,6 +75,7 @@ const ConfirmEmail = () => {
     }
 
     const modifyPerson = () => {
+        setLoading(true);
         if(!pictureChanged){
             fireBase.ModifyUserFireBase(id, personSelect).then(() => {
                 setMessage("Vos données ont bien été modifiées");
@@ -214,9 +217,22 @@ const ConfirmEmail = () => {
                         <label>Image profil</label>
                         <input className="form-control" name='pictureName' type="file" onChange={handleCompressedUpload} />
                     </div>
-                    <button className="btn btn-secondary m-4" onClick={modifyPerson} >
-                        Modifier
-                    </button>
+                    <div className="row align-items-center mb-4">
+                    {
+                        !loading && 
+                        <div className="col-sm mt-4">
+                            <button className="btn btn-secondary m-4" onClick={modifyPerson} >
+                                Modifier
+                            </button>
+                        </div>
+                    }
+                    {
+                        loading && 
+                        <div className="col-sm mt-4">
+                            <SpinnerBootstrap />
+                        </div>
+                    }
+                    </div>
                     <div className={'alert alert-success ' + myClass} role="alert">
                         <p>{message}</p>
                     </div>
