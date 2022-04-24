@@ -28,6 +28,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
       };
 
     const sendPicture = () => {
+        var counter = pictures.length-1;
         pictures.forEach(picture => {
             const uploadTask = storage.ref(`images/${picture.name}`).put(picture);
             uploadTask.on(
@@ -43,11 +44,11 @@ const EventFlex = ({event, id=null, userId=null}) => {
                         .getDownloadURL()
                         .then(pictureName => {
                             AddElementInPhoto(id, pictureName).then(() => {
+                                counter--;
+                                if(counter <= 0){
                                     window.location.reload(false);
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                });
+                                }
+                            });
                         });
                 }
             )
@@ -79,7 +80,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                                 </div>
                                 <div className="col-sm">
                                     <button className={'btn btn-primary mt-4 mb-3 ' + className} onClick={sendPicture}>
-                                        Ajouter l'image
+                                        Ajouter les images
                                     </button>
                                 </div>
                             </div>
@@ -87,8 +88,8 @@ const EventFlex = ({event, id=null, userId=null}) => {
                             {
                                 event.value.Photos.map((photo) => {
                                     return (
-                                    <div className='mt-2 mb-2'>
-                                        <img key={photo} src={photo} alt="lié à l'event" />
+                                    <div key={photo} className='mt-2 mb-2'>
+                                        <img src={photo} alt="lié à l'event" />
                                     </div>
                                     )
                                 })
