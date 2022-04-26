@@ -6,12 +6,14 @@ import { AddElementInPhoto, DeleteEvent } from '../firebase';
 import Compressor from 'compressorjs';
 import { storage } from '../firebase';
 import SpinnerBootstrap from './spinnerBootstrap';
+import ModalAddComment from './modalAddComment';
 
 const EventFlex = ({event, id=null, userId=null}) => {
     const [pictures, setPictures] = useState([]);
     const history = useHistory();
     const [className, setClassName] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [index, setIndex] = useState(0);
 
     const handleCompressedUpload = (e) => {
         const images = e.target.files;
@@ -66,7 +68,6 @@ const EventFlex = ({event, id=null, userId=null}) => {
         }
     }
 
-
     return ( 
         <>
             <div className='text-center'>
@@ -101,15 +102,27 @@ const EventFlex = ({event, id=null, userId=null}) => {
                                 }
                             </div>
                             <h4>Les photos de l'event</h4>
+                            <div className='containerFlexible'>
                             {
-                                event.value.Photos.map((photo) => {
+                                event.value.Photos.map((photo, index) => {
                                     return (
-                                    <div key={photo} className='mt-2 mb-2'>
-                                        <img src={photo} alt="lié à l'event" />
+                                    <div key={index}>
+                                        <div className='mt-2 mb-2'>
+                                            <img className='pictureEvent' src={photo.image} alt="lié à l'event" />
+                                            <ion-icon  class="myIcon" name="pencil-outline" data-toggle="modal" data-target="#addComment" onClick={() => setIndex(index)}></ion-icon>
+                                        </div>
+                                        <div>
+                                            {
+                                                photo.comment && 
+                                                <p>{photo.comment}</p>
+                                            }
+                                        </div>
                                     </div>
                                     )
                                 })
                             }
+                            </div>
+                            <ModalAddComment id={id} picturesList={event.value.Photos} index={index} />
                         </div>
                     }
                     {!id &&

@@ -54,6 +54,16 @@ export async function deletePicture(url) {
   return await firebase.storage().refFromURL(url).delete();
 }
 
+export async function addCommentInPicture(id, pictureList) {
+  console.log(id);
+  console.log(pictureList);
+  return await db.collection("evenement").doc(id).update({
+    Photos: pictureList,
+  });
+}
+
+export async function copyDataInTest() {}
+
 //Cette fonction permet de changer la photo de profil parmis celle dans le tableau de la personne.
 export function changePictureProfil(id, pictureName) {
   return db.collection("famille").doc(id).update({
@@ -86,11 +96,12 @@ function ModifyUserFireBase(id, person, pictureName = "") {
 }
 
 export function AddElementInPhoto(id, pictureName) {
+  let data = { image: pictureName };
   return db
     .collection("evenement")
     .doc(id)
     .update({
-      Photos: firebase.firestore.FieldValue.arrayUnion(pictureName),
+      Photos: firebase.firestore.FieldValue.arrayUnion(data),
     });
 }
 

@@ -67,6 +67,10 @@ table {
     width: 150px;
     height: auto;
   }
+  .pictureEvent{
+    width: 300px;
+    height: auto;
+  }
   .elementFlexibleCustom {
     text-align: center;
     flex-grow: 1;
@@ -84,6 +88,7 @@ table {
 .containerFlexible {
   display: flex;
   flex-wrap: wrap;
+  justify-content : center;
 }
 
 .elementFlexible {
