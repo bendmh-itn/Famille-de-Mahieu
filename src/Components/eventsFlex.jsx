@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../App.css';
 import moment from 'moment';
 import { useHistory } from "react-router-dom";
@@ -49,7 +49,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
-                            AddElementInPhoto(id, pictureName).then(() => {
+                            AddElementInPhoto(id, pictureName, userId).then(() => {
                                 counter--;
                                 if(counter <= 0){
                                     window.location.reload(false);
@@ -106,15 +106,18 @@ const EventFlex = ({event, id=null, userId=null}) => {
                             {
                                 event.value.Photos.map((photo, index) => {
                                     return (
-                                    <div key={index}>
-                                        <div className='mt-2 mb-2'>
+                                    <div className='m-1' key={index}>
+                                        <div>
                                             <img className='pictureEvent' src={photo.image} alt="lié à l'event" />
-                                            <ion-icon  class="myIcon" name="pencil-outline" data-toggle="modal" data-target="#addComment" onClick={() => setIndex(index)}></ion-icon>
+                                            {
+                                                userId && userId === photo.Added_by &&
+                                                <ion-icon  class="myIcon" name="pencil-outline" data-toggle="modal" data-target="#addComment" onClick={() => setIndex(index)}></ion-icon>
+                                            }
                                         </div>
                                         <div>
                                             {
                                                 photo.comment && 
-                                                <p>{photo.comment}</p>
+                                                <p className='mb-1'>{photo.comment}</p>
                                             }
                                         </div>
                                     </div>

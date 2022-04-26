@@ -62,7 +62,7 @@ const ListeEvenements = () => {
             {id && 
                     events.filter((event) => event.id === id).map((event) => {
                         return(
-                            <EventFlex key={event.id} event={event} id={id} />
+                            <EventFlex key={event.id} event={event} id={id} userId={userId} />
                         )
                     })
                 }

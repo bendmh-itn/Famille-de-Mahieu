@@ -38,7 +38,7 @@ const ModalAddComment = ({id, picturesList, index}) => {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={getData}>Créer</button>
+                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={getData}>{picturesList[index] && picturesList[index].comment ? "Modifier": "Créer"}</button>
                 </div>
                 </div>
             </div>

@@ -95,8 +95,8 @@ function ModifyUserFireBase(id, person, pictureName = "") {
     });
 }
 
-export function AddElementInPhoto(id, pictureName) {
-  let data = { image: pictureName };
+export function AddElementInPhoto(id, pictureName, userId) {
+  let data = { image: pictureName, Added_by: userId };
   return db
     .collection("evenement")
     .doc(id)

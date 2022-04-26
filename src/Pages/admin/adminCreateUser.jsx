@@ -24,8 +24,6 @@ const AdminCreateUser = () => {
     const [myClass, setMyClass] = useState("backCard");
 
     function CreateUser() {
-        console.log(personSelect)
-        console.log(picture)
         if(picture === ""){
             CreateUserFireBase(personSelect).then(() => {
                 setMessage(personSelect.firstName + " " + personSelect.lastName + " a bien été enregistré");
