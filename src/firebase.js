@@ -117,9 +117,18 @@ export function CreateEvent(data, pictureName, userId) {
   });
 }
 
+export function UpdateEvent(data, id, pictureName) {
+  return db
+    .collection("evenement")
+    .doc(id)
+    .update({
+      Titre: data.titre,
+      PhotoEvent: pictureName,
+      Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
+    });
+}
+
 export function CreateUserFireBase(person, pictureName = "") {
-  console.log(person);
-  console.log(pictureName);
   return db.collection("test").add({
     firstName: person.firstName,
     lastName: person.lastName,

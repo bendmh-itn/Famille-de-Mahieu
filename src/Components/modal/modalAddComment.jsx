@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { modifyPhotosInEvent } from '../firebase';
+import { modifyPhotosInEvent } from '../../firebase';
 
 
 const ModalAddComment = ({id, picturesList, index}) => {

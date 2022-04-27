@@ -82,8 +82,6 @@ const AdminCreateUser = () => {
 
     const ModifyUser = () => {
         setLoading(true);
-        console.log(personSelect);
-        console.log(id);
         if(!pictureChanged){
             fireBase.ModifyUserFireBase(id, personSelect).then(() => {
                 setMessage("Vos données ont bien été modifiées");

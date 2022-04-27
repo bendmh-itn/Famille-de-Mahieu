@@ -1,13 +1,12 @@
 import React, { useState} from 'react';
 import Compressor from 'compressorjs';
-import { CreateEvent } from '../firebase';
-import { storage } from '../firebase';
-import SpinnerBootstrap from './spinnerBootstrap';
+import { UpdateEvent } from '../../firebase';
+import { storage } from '../../firebase';
 
 
-const ModalCreateEvent = ({userId}) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+const ModalEditEvent = ({title, date, pictureName, id, setLoading}) => {
+    const [data, setData] = useState({titre : title, date: date, pictureName: pictureName});
+    const [pictureChanged, setPictureChanged] = useState(false);
 
     const chooseTitle = (e) => {
         if(e!== null){
@@ -30,6 +29,7 @@ const ModalCreateEvent = ({userId}) => {
     }
 
     const handleCompressedUpload = (e) => {
+        setPictureChanged(true);
         const { name } = e.target;
         const image = e.target.files[0];
         
@@ -48,8 +48,9 @@ const ModalCreateEvent = ({userId}) => {
 
     const getData = () => {
         setLoading(true);
-        let picture = data.pictureName;
-        const uploadTask = storage.ref(`evenements/${picture.name}`).put(picture);
+        if(pictureChanged){
+            let picture = data.pictureName;
+            const uploadTask = storage.ref(`evenements/${picture.name}`).put(picture);
             uploadTask.on(
                 "state_changed",
                 snapshot => {},
@@ -62,7 +63,7 @@ const ModalCreateEvent = ({userId}) => {
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
-                            CreateEvent(data, pictureName, userId).then(() => {
+                            UpdateEvent(data, id, pictureName).then(() => {
                                 window.location.reload(false);
                                 })
                                 .catch((error) => {
@@ -71,42 +72,35 @@ const ModalCreateEvent = ({userId}) => {
                         });
                 }
             )
+        }else {
+            UpdateEvent(data, id, data.pictureName).then(() => {
+                window.location.reload(false);
+            });
+        }
     }
 
     return ( 
         <>
-            {
-                loading && 
-                <div className='mb-3'>
-                    <SpinnerBootstrap />
-                </div>
-            }
-            {
-                !loading &&
-                <button type="button" className="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModalCreate">
-                    Créer un événement
-                </button>
-            }
-            <div className="modal fade" id="exampleModalCreate" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="editEvent" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Créer l'événement</h5>
+                    <h5 className="modal-title" id="editEventLabel">Modifier l'événement</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div className="modal-body">
                     <div className="form-group">
-                        <label>Titre de l'événement</label>
-                        <input className="form-control" placeholder="Titre de l'événement" name="titre" onChange={chooseTitle} required></input>
+                        <label>Changer le titre</label>
+                        <input className="form-control" value={data.titre} placeholder="Titre de l'événement" name="titre" onChange={chooseTitle} required></input>
                     </div>
                     <div className="form-group">
-                        <label>Date de l'événement</label>
-                        <input className="form-control" type="date" name="date" onChange={chooseDate} required></input>
+                        <label>Changer la date</label>
+                        <input className="form-control" value={data.date} type="date" name="date" onChange={chooseDate} required></input>
                     </div>
                     <div className="form-group">
-                        <label className='mb-2'>Ajouter une image</label>
+                        <label className='mb-2'>Changer l'image</label>
                         <input className="form-control" name='pictureName' type="file" onChange={handleCompressedUpload} />          
                     </div>
                 </div>
@@ -121,4 +115,4 @@ const ModalCreateEvent = ({userId}) => {
      );
 }
  
-export default ModalCreateEvent;
+export default ModalEditEvent;

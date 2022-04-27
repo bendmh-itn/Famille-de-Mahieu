@@ -6,8 +6,9 @@ import { AddElementInPhoto, DeleteEvent } from '../firebase';
 import Compressor from 'compressorjs';
 import { storage } from '../firebase';
 import SpinnerBootstrap from './spinnerBootstrap';
-import ModalAddComment from './modalAddComment';
+import ModalAddComment from './modal/modalAddComment';
 import { modifyPhotosInEvent } from '../firebase';
+import ModalEditEvent from './modal/modalEditEvent';
 
 const EventFlex = ({event, id=null, userId=null}) => {
     const [pictures, setPictures] = useState([]);
@@ -64,7 +65,6 @@ const EventFlex = ({event, id=null, userId=null}) => {
 
     const ConfirmDelete = (id, info, index = null, data = null) => {
         var res = window.confirm("Êtes-vous sûr de vouloir supprimer?");
-        console.log(info)
         if(res) {
             switch (info) {
             case "event" : 
@@ -82,8 +82,6 @@ const EventFlex = ({event, id=null, userId=null}) => {
 
     const DeletePicture = (index, picturesList, id) => {
         picturesList.splice(index, 1);
-        console.log(picturesList)
-        console.log(id)
         modifyPhotosInEvent(id, picturesList).then(() => {
             window.location.reload(false);
         });
@@ -97,6 +95,13 @@ const EventFlex = ({event, id=null, userId=null}) => {
                     {id && 
                         <div>
                             <img src={event.value.PhotoEvent} alt={event.value.Titre} />
+                            {
+                                userId && event.value.Created_By === userId &&
+                                <>
+                                    <ion-icon  class="myIcon" name="pencil-outline" data-toggle="modal" data-target="#editEvent"></ion-icon>
+                                    <ModalEditEvent title={event.value.Titre} date={moment.unix(event.value.Date.seconds).format("YYYY-MM-DD")} pictureName={event.value.PhotoEvent} id={id} setLoading={setLoading} />
+                                </>
+                            }
                             <div className="row align-items-center mb-4">
                                 {
                                     !loading && 
@@ -154,8 +159,8 @@ const EventFlex = ({event, id=null, userId=null}) => {
                         <div>
                             <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
                             {event.value.Created_By === userId && 
-                                <div>
-                                    <button className='btn btn-danger mb-3' onClick={() => ConfirmDelete(event.id, "event")}>Supprimer</button>
+                                <div className='mb-3' >
+                                    <button className='btn btn-danger' onClick={() => ConfirmDelete(event.id, "event")}>Supprimer</button>
                                 </div>
                                 
                             }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getEvents } from '../firebase';
 import EventFlex from '../Components/eventsFlex';
 import { useParams } from "react-router-dom";
-import ModalCreateEvent from '../Components/modalCreateEvent';
+import ModalCreateEvent from '../Components/modal/modalCreateEvent';
 import { getUserData } from '../Functions/cache';
 import { PutDataLocalStorage } from '../firebase';
 
@@ -60,12 +60,12 @@ const ListeEvenements = () => {
                 </>
             }
             {id && 
-                    events.filter((event) => event.id === id).map((event) => {
-                        return(
-                            <EventFlex key={event.id} event={event} id={id} userId={userId} />
-                        )
-                    })
-                }
+                events.filter((event) => event.id === id).map((event) => {
+                    return(
+                        <EventFlex key={event.id} event={event} id={id} userId={userId} />
+                    )
+                })
+            }
 			
         </>
      );
