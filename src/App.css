@@ -49,7 +49,7 @@ table {
 /*Mettre les images selon la taille de l'écran */
 @media screen and (min-width: 10px) and (max-width: 750px) {
   img {
-    width: 80%;
+    width: 100%;
   }
   .elementFlexibleCustom {
     text-align: center;
@@ -88,7 +88,7 @@ table {
 .containerFlexible {
   display: flex;
   flex-wrap: wrap;
-  justify-content : center;
+  justify-content : center
 }
 
 .elementFlexible {

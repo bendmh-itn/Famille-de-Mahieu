@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { addCommentInPicture } from '../firebase';
+import { modifyPhotosInEvent } from '../firebase';
 
 
 const ModalAddComment = ({id, picturesList, index}) => {
@@ -14,7 +14,7 @@ const ModalAddComment = ({id, picturesList, index}) => {
 
     const getData = () => {
         picturesList[index].comment = data;
-        addCommentInPicture(id, picturesList).then(() => {
+        modifyPhotosInEvent(id, picturesList).then(() => {
             window.location.reload(false);
         })
     }

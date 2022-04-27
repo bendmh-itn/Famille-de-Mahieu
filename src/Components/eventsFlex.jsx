@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import '../App.css';
 import moment from 'moment';
 import { useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import Compressor from 'compressorjs';
 import { storage } from '../firebase';
 import SpinnerBootstrap from './spinnerBootstrap';
 import ModalAddComment from './modalAddComment';
+import { modifyPhotosInEvent } from '../firebase';
 
 const EventFlex = ({event, id=null, userId=null}) => {
     const [pictures, setPictures] = useState([]);
@@ -61,11 +62,31 @@ const EventFlex = ({event, id=null, userId=null}) => {
         });
     }
 
-    const ConfirmDelete = (id) => {
+    const ConfirmDelete = (id, info, index = null, data = null) => {
         var res = window.confirm("Êtes-vous sûr de vouloir supprimer?");
+        console.log(info)
         if(res) {
-            DeleteEvent(id);
+            switch (info) {
+            case "event" : 
+                DeleteEvent(id);
+                break;
+            case "pictureEvent" :
+                DeletePicture(index, data, id);
+                break;
+            default :
+                console.log("Pas encore implémenté")
+            }
+
         }
+    }
+
+    const DeletePicture = (index, picturesList, id) => {
+        picturesList.splice(index, 1);
+        console.log(picturesList)
+        console.log(id)
+        modifyPhotosInEvent(id, picturesList).then(() => {
+            window.location.reload(false);
+        });
     }
 
     return ( 
@@ -111,15 +132,16 @@ const EventFlex = ({event, id=null, userId=null}) => {
                                             <img className='pictureEvent' src={photo.image} alt="lié à l'event" />
                                             {
                                                 userId && userId === photo.Added_by &&
+                                                <div>
                                                 <ion-icon  class="myIcon" name="pencil-outline" data-toggle="modal" data-target="#addComment" onClick={() => setIndex(index)}></ion-icon>
+                                                <ion-icon class="myIcon" name="trash-outline" onClick={() => ConfirmDelete(id, "pictureEvent", index, event.value.Photos)}></ion-icon>
+                                                </div>
                                             }
                                         </div>
-                                        <div>
-                                            {
-                                                photo.comment && 
-                                                <p className='mb-1'>{photo.comment}</p>
-                                            }
-                                        </div>
+                                        {
+                                            photo.comment && 
+                                            <p className='mb-1'>{photo.comment}</p>
+                                        }
                                     </div>
                                     )
                                 })
@@ -133,7 +155,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                             <button className="myButton mb-3" onClick={() => history.push("/events/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
                             {event.value.Created_By === userId && 
                                 <div>
-                                    <button className='btn btn-danger mb-3' onClick={() => ConfirmDelete(event.id)}>Supprimer</button>
+                                    <button className='btn btn-danger mb-3' onClick={() => ConfirmDelete(event.id, "event")}>Supprimer</button>
                                 </div>
                                 
                             }

@@ -54,9 +54,7 @@ export async function deletePicture(url) {
   return await firebase.storage().refFromURL(url).delete();
 }
 
-export async function addCommentInPicture(id, pictureList) {
-  console.log(id);
-  console.log(pictureList);
+export async function modifyPhotosInEvent(id, pictureList) {
   return await db.collection("evenement").doc(id).update({
     Photos: pictureList,
   });
