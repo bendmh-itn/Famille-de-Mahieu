@@ -19,7 +19,7 @@ const Jeu = () => {
     const [imageHorizontal, setImageHorizontal] = useState("imageVerticale");
 
     function VerifyAnswer () {
-        if(selectValue.toLowerCase() === personSelected.firstName.toLowerCase().replace(/\s+/g, '')){   
+        if(selectValue.toLowerCase().replace(/\s+/g, '') === personSelected.firstName.toLowerCase().replace(/\s+/g, '')){   
             if(indice){
                 setScore(score+0.5);
             }else{
