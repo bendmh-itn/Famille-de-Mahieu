@@ -192,13 +192,22 @@ export const MoisPersons = () => {
  * @param {correspond à la generation demandée} e
  * @returns array
  */
-export const FilterByGeneration = (e) => {
+export const FilterByGeneration = (e, jeu = false) => {
   let data = [];
-  allData.forEach((element) => {
-    if (element.generation === e) {
-      data.push(element);
-    }
-  });
+  if (jeu) {
+    let dataFiltred = FilterByPicture(allData);
+    dataFiltred.forEach((element) => {
+      if (element.generation === e) {
+        data.push(element);
+      }
+    });
+  } else {
+    allData.forEach((element) => {
+      if (element.generation === e) {
+        data.push(element);
+      }
+    });
+  }
   data.sort(trieArray);
   return data;
 };
@@ -233,7 +242,7 @@ export const RandomizeArray = () => {
 };
 
 //Cette fonction permet de mélanger les données dans un tableau
-function randomize(tab) {
+export function randomize(tab) {
   var i, j, tmp;
   for (i = tab.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
@@ -242,4 +251,38 @@ function randomize(tab) {
     tab[j] = tmp;
   }
   return tab;
+}
+
+export function getParentsArray(numberChildren) {
+  let tabParents = [];
+  let dataFinal = {};
+  while (tabParents.length === 0) {
+    let choix = Math.floor(Math.random() * 2);
+    let comparatif;
+    if (choix === 0) {
+      comparatif = numberChildren.slice(0, 2);
+    } else {
+      comparatif = numberChildren.slice(0, 2) + "0";
+    }
+    allData
+      .filter((element) => element.numberFamilly === comparatif)
+      .forEach((element) => {
+        tabParents.push(element);
+        dataFinal.goodAnswer = element;
+      });
+  }
+  let dataFiltred = FilterByPicture(allData);
+  const parents = dataFiltred.filter(
+    (element) =>
+      element.generation === "3" &&
+      element.numberFamilly !== numberChildren.slice(0, 2) &&
+      element.numberFamilly !== numberChildren.slice(0, 2) + "0"
+  );
+  let parentsRandom = randomize(parents);
+  for (let i = 0; i < 3; i++) {
+    tabParents.push(parentsRandom[i]);
+  }
+  let tabParentsRandom = randomize(tabParents);
+  dataFinal.tabParentsRandom = tabParentsRandom;
+  return dataFinal;
 }

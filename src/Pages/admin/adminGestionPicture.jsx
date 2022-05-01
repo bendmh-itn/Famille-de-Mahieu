@@ -23,7 +23,7 @@ const AdminGestionPicture = () => {
         }).catch((error) => {
             console.log(error)
         });
-        var listRef = storage.ref().child('evenements/');
+        listRef = storage.ref().child('evenements/');
         listRef.listAll()
         .then((res) => {
             res.items.forEach((itemRef) => {

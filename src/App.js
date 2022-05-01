@@ -15,6 +15,7 @@ import BarreAjoutEmail from "./Components/barreAjoutEmail";
 import BarreSeConnecter from "./Components/barreSeConnecter";
 import adminCreateUser from "./Pages/admin/adminCreateUser";
 import AdminGestionPicture from "./Pages/admin/adminGestionPicture";
+import Jeu2 from "./Pages/jeu2";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/generation3" component={Generation3} />
                 <Route path="/generation2" component={Generation2} />
                 <Route path="/anniversaire" component={AnniversairePage} />
+                <Route path="/jeu2" component={Jeu2} />
                 <Route path="/jeu" component={Jeu} />
                 <Route path="/profil" component={Profil} />
                 <Route path="/" component={HomePage} />

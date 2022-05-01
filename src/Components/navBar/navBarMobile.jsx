@@ -28,9 +28,9 @@ const NavBarMobile = () => {
                     {menuSelected.includes("generation") && <ion-icon name="list-sharp"></ion-icon>}
                     {!menuSelected.includes("generation") && <ion-icon name="list-outline"></ion-icon>}
                 </NavLink>
-                <NavLink onClick={() => changeMenuSelected("jeu")} className="navbar-brand" to="/jeu">
-                    {menuSelected === "jeu" && <ion-icon name="game-controller-sharp"></ion-icon>}
-                    {menuSelected !== "jeu" && <ion-icon name="game-controller-outline"></ion-icon>}
+                <NavLink onClick={() => changeMenuSelected("jeu")} className="navbar-brand" to="/jeu2">
+                    {menuSelected.includes("jeu") && <ion-icon name="game-controller-sharp"></ion-icon>}
+                    {!menuSelected.includes("jeu") && <ion-icon name="game-controller-outline"></ion-icon>}
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("events")} className="navbar-brand" to="/events">
                     {menuSelected.includes("events") && <ion-icon name="newspaper-sharp"></ion-icon>}

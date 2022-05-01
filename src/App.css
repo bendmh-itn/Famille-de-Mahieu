@@ -51,6 +51,23 @@ table {
   img {
     width: 100%;
   }
+  .imageVerticale {
+    height: 300px;
+  }
+  .imageHorizontale img {
+    width: 100%;
+  }
+  .imageHorizontale {
+    height: 300px;
+    align-items: center;
+  }
+  .imageVerticale img {
+    height: 100%;
+    width: auto;
+  }
+  .imageJeu2 {
+    margin-top: 10px;
+  }
   .elementFlexibleCustom {
     text-align: center;
     flex-grow: 1;
@@ -62,6 +79,13 @@ table {
 @media screen and (min-width: 751px) and (max-width: 40000px) {
   img {
     height: 300px;
+    width: auto;
+  }
+  .imageJeu2 {
+    cursor: pointer;
+    width: 200px;
+    height: auto;
+    margin: 10px;
   }
   .pictureAdmin {
     width: 150px;

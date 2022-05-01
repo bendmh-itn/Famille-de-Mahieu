@@ -27,8 +27,14 @@ const NavBar = () => {
                                 <NavLink className="dropdown-item" to="/generation4">Génération 4</NavLink>
                             </div>
                         </li>
-                        <li className="nav-item">
-                            <NavLink className="navbar-brand" to="/jeu">Jeu</NavLink>
+                        <li className="nav-item dropdown">
+                            <NavLink className="navbar-brand dropdown-toggle" to="#" id="navbarDropdownJeux" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Jeux
+                            </NavLink>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <NavLink className="dropdown-item" to="/jeu2">Jeu 1</NavLink>
+                                <NavLink className="dropdown-item" to="/jeu">Jeu 2</NavLink>
+                            </div>
                         </li>
                         <li className="nav-item">
                             <NavLink className="navbar-brand" to="/events">Événements</NavLink>
