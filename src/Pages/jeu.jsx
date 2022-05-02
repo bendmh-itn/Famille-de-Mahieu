@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { RandomizeArray, getData, copyData } from '../Functions/FilterData';
 import fireBase from '../firebase';
 import NavBarJeux from '../Components/navBar/navBarJeux';
@@ -17,6 +17,7 @@ const Jeu = () => {
     const [level, setLevel] = useState(0);
     const [imageRef] = useState(React.createRef());
     const [imageHorizontal, setImageHorizontal] = useState("imageVerticale");
+    const inputReference = useRef(null);
 
     function VerifyAnswer () {
         if(selectValue.toLowerCase().replace(/\s+/g, '') === personSelected.firstName.toLowerCase().replace(/\s+/g, '')){   
@@ -35,6 +36,7 @@ const Jeu = () => {
             setTotal(total + 1);
         }
         setSelectValue("");
+        inputReference.current.focus();
     }
 
     function TryAgain() {
@@ -129,6 +131,7 @@ const Jeu = () => {
                 setPersonSelected(dataFinal[0]);
             }
         }
+        inputReference.current.focus();
     }, [level]);
 
     const changeDimension = () => {
@@ -154,7 +157,8 @@ const Jeu = () => {
                     <div className={imageHorizontal}><img ref={imageRef} src={personSelected.pictureName} alt={personSelected.firstName} onLoad={changeDimension}/></div>
                     {indice && <h2>{personSelected.lastName}</h2>}
                     <div className="form-group mt-4">
-                        <input type="text" value={selectValue} onChange={e => setSelectValue(e.target.value)} />
+                        <input type="text" ref={inputReference} value={selectValue} onKeyPress={(e) => {if (e.key === "Enter") {VerifyAnswer();}
+                    }} onChange={e => setSelectValue(e.target.value)} />
                     </div>
                     <div className='containerFlexible'>
                         <div className='elementFlexible'>
