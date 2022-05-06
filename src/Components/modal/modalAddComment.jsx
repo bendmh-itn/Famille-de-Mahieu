@@ -4,7 +4,6 @@ import { modifyPhotosInEvent } from '../../firebase';
 
 const ModalAddComment = ({id, picturesList, index}) => {
     const [data, setData] = useState("");
-
     const writeComment = (e) => {
         if(e!== null){
             const { value } = e.target;

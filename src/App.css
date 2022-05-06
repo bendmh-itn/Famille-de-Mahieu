@@ -112,7 +112,10 @@ table {
 .containerFlexible {
   display: flex;
   flex-wrap: wrap;
-  justify-content : center
+}
+
+.center {
+  justify-content: center;
 }
 
 .elementFlexible {
@@ -198,6 +201,15 @@ table {
 
 .float {
   text-align: center;
+}
+
+.image-upload>input {
+  display: none;
+}
+
+.linkEvent {
+  color: black;
+  text-decoration: none;
 }
 
 /* Ces lignes permettent d'enlever le control sur le carousel.

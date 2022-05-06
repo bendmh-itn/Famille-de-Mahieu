@@ -36,10 +36,8 @@ function App() {
               <Switch>
                 <Route path="/admin/users" component={adminCreateUser} />
                 <Route path="/admin/pictures" component={AdminGestionPicture} />
-                <Route path="/events/:id" component={ListeEvenements} />
-                <Route path="/events" component={ListeEvenements} />
                 <Route
-                  path="/:generation/:numberFamilly"
+                  path="/arbre/:generation/:numberFamilly"
                   component={HomePage}
                 />
                 <Route path="/generation4" component={Generation4} />
@@ -49,7 +47,9 @@ function App() {
                 <Route path="/jeu2" component={Jeu2} />
                 <Route path="/jeu" component={Jeu} />
                 <Route path="/profil" component={Profil} />
-                <Route path="/" component={HomePage} />
+                <Route path="/arbre" component={HomePage} />
+                <Route path="/event/:id" component={ListeEvenements} />
+                <Route path="/" component={ListeEvenements} />
               </Switch>
             </div>
           </main>

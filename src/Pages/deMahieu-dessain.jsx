@@ -80,7 +80,7 @@ const Family = ({match}) => {
 					return <TrombinoscopeFlex
 						person={person}
 						key={person.firstName + "" + person.famillyName}
-						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly }
+						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/arbre/" + person.generation + "/" + person.numberFamilly }
 					/>
 				}
 			)}

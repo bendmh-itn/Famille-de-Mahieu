@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { FilterByGeneration, getData, copyData } from '../Functions/FilterData';
 import fireBase from '../firebase';
-import {ACTUAL_GENERATION} from "../constant";
 import NavBarGeneration from '../Components/navBar/navBarGenereation';
 
 
@@ -33,7 +32,7 @@ const Generation3 = () => {
 					<NavBarGeneration />
 				</div>
 			    <h1 className="text-uppercase text-center">La 3<sup className="text-lowercase">ème</sup> génération</h1>
-                <h3 className="mb-4">Nous sommes {famillyFiltred.length} personnes</h3>
+                <h3 className="mb-4">Il y a {famillyFiltred.length} personnes</h3>
             </div>
 			<div className="containerFlexible">
 			{
@@ -42,7 +41,7 @@ const Generation3 = () => {
 					return <TrombinoscopeFlex
 						person={person}
 						key={person.firstName + "" + person.famillyName}
-						link={person.generation === ACTUAL_GENERATION || person.generation === "1" ? "#" :  "/" + person.generation + "/" + person.numberFamilly } 
+						link={"/arbre/" + person.generation + "/" + person.numberFamilly } 
 					/>
 					}
 				

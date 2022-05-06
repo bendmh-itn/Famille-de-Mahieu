@@ -93,13 +93,27 @@ function ModifyUserFireBase(id, person, pictureName = "") {
     });
 }
 
-export function AddElementInPhoto(id, pictureName, userId) {
-  let data = { image: pictureName, Added_by: userId };
+export function AddElementInPhoto(id, pictureName, userId, dataSended) {
   return db
     .collection("evenement")
     .doc(id)
     .update({
-      Photos: firebase.firestore.FieldValue.arrayUnion(data),
+      Photos:
+        dataSended === "images"
+          ? firebase.firestore.FieldValue.arrayUnion({
+              image: pictureName,
+              Added_by: userId,
+            })
+          : dataSended === "video"
+          ? firebase.firestore.FieldValue.arrayUnion({
+              video: pictureName,
+              Added_by: userId,
+            })
+          : firebase.firestore.FieldValue.arrayUnion({
+              link: pictureName.link,
+              texte: pictureName.title,
+              Added_by: userId,
+            }),
     });
 }
 

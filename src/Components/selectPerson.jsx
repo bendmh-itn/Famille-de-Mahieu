@@ -7,7 +7,7 @@ const SelectPerson = ({data}) => {
     const history = useHistory();
     const searchFamilly = (event) => {
         if (event !== null){
-            history.push('/' + event.value);
+            history.push('/arbre/' + event.value);
         }
     }
 

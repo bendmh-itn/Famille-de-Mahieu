@@ -32,7 +32,7 @@ const Generation4 = () => {
 					<NavBarGeneration />
 				</div>
 			    <h1 className="text-uppercase text-center">La 4<sup className="text-lowercase">ème</sup> génération</h1>
-                <h3 className="mb-4">Nous sommes {famillyFiltred.length} personnes</h3>
+                <h3 className="mb-4">Il y a {famillyFiltred.length} personnes</h3>
             </div>
 			<div className="containerFlexible">
 			{
@@ -42,7 +42,7 @@ const Generation4 = () => {
 						person={person}
 						key={person.firstName + "" + person.famillyName}
 						dateDeces={person.deathDate}
-						link={"/3/" + Math.round(person.numberFamilly/10) }
+						link={"/arbre/3/" + Math.round(person.numberFamilly/10) }
 					/>
 					}
 				

@@ -17,8 +17,8 @@ const NavBarMobile = () => {
         <>
             <nav id="MyModification" className="navbar navbar-expand-lg navbar-dark">
                 <NavLink onClick={() => changeMenuSelected("")} className="navbar-brand" to="/">
-                    {menuSelected === "" && <ion-icon name="home-sharp"></ion-icon>}
-                    {menuSelected !== "" && <ion-icon name="home-outline"></ion-icon>}  
+                    {(menuSelected === "" || menuSelected.includes("event")) && <ion-icon name="home-sharp"></ion-icon>}
+                    {menuSelected !== "" && !menuSelected.includes("event") && <ion-icon name="home-outline"></ion-icon>}  
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("anniversaire")} className="navbar-brand" to="/anniversaire">
                     {menuSelected === "anniversaire" && <ion-icon name="balloon-sharp"></ion-icon>}
@@ -32,9 +32,9 @@ const NavBarMobile = () => {
                     {menuSelected.includes("jeu") && <ion-icon name="game-controller-sharp"></ion-icon>}
                     {!menuSelected.includes("jeu") && <ion-icon name="game-controller-outline"></ion-icon>}
                 </NavLink>
-                <NavLink onClick={() => changeMenuSelected("events")} className="navbar-brand" to="/events">
-                    {menuSelected.includes("events") && <ion-icon name="newspaper-sharp"></ion-icon>}
-                    {!menuSelected.includes("events") && <ion-icon name="newspaper-outline"></ion-icon>}
+                <NavLink onClick={() => changeMenuSelected("arbre")} className="navbar-brand" to="/arbre">
+                    {menuSelected.includes("arbre") && <ion-icon name="git-network"></ion-icon>}
+                    {!menuSelected.includes("arbre") && <ion-icon name="git-network-outline"></ion-icon>}
                 </NavLink>
                 <NavLink onClick={() => changeMenuSelected("profil")} className="navbar-brand" to="/profil">
                     {menuSelected === "profil" && <ion-icon name="person-sharp"></ion-icon>}

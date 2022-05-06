@@ -106,7 +106,7 @@ const ModalEditEvent = ({title, date, pictureName, id, setLoading}) => {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={getData}>Créer</button>
+                    <button type="button" className="btn btn-success" data-dismiss="modal" onClick={getData}>Changer</button>
                 </div>
                 </div>
             </div>
