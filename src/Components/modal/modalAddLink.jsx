@@ -2,8 +2,9 @@ import React, { useEffect, useState} from 'react';
 import { AddElementInPhoto, modifyPhotosInEvent } from '../../firebase';
 
 
-const ModalAddDescription = ({id, userId, index, picturesList}) => {
+const ModalAddLink = ({id, userId, index, picturesList}) => {
     const [data, setData] = useState({title : index !== -1 ? picturesList[index].texte : "", link: index !== -1 ? picturesList[index].link : ""});
+    
     const chooseTitle = (e) => {
         if(e!== null){
             const { name, value } = e.target;
@@ -75,4 +76,4 @@ const ModalAddDescription = ({id, userId, index, picturesList}) => {
      );
 }
  
-export default ModalAddDescription
+export default ModalAddLink

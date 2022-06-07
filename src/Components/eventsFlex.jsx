@@ -25,7 +25,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
         for(var i = 0; i < images.length; i++){
             let image = images[i];
             new Compressor(image, {
-                quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
+                quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
                 success: (compressedResult) => {
                     imagesCompress.push(compressedResult)
                 },

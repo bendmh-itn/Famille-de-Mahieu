@@ -60,6 +60,8 @@ const AdminCreateUser = () => {
     }
 
     const modifyPersonSelect = (e) => {
+        setLoading(false);
+        setMessage("vide");
         window.scroll(0,0);
         setCreate(false);
         if(e !== null){
@@ -130,7 +132,7 @@ const AdminCreateUser = () => {
         });
         
         new Compressor(image, {
-          quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
+          quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
           success: (compressedResult) => {
             // compressedResult has the compressed file.
             // Use the compressed file to upload the images to your server.

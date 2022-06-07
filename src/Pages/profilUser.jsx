@@ -11,6 +11,7 @@ import ControlledCarousel from '../Components/CarouselBootstrap'
 import SpinnerBootstrap from '../Components/spinnerBootstrap';
 import { ACTUAL_GENERATION } from '../constant';
 import { NavLink } from "react-router-dom";
+import ModalAddPeople from '../Components/modal/modalAddPeople';
 
 const ConfirmEmail = () => {
 
@@ -49,7 +50,7 @@ const ConfirmEmail = () => {
         });
         
         new Compressor(image, {
-          quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
+          quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
           success: (compressedResult) => {
             // compressedResult has the compressed file.
             // Use the compressed file to upload the images to your server.
@@ -237,12 +238,23 @@ const ConfirmEmail = () => {
                         </div>
                     }
                     {
+                        !loading && 
+                        <div className="col-sm">
+                            <button className="btn btn-primary m-4" data-toggle="modal" data-target="#addPeople" >
+                                Ajouter une personne
+                            </button>
+                        </div>
+                    }
+
+
+                    {
                         loading && 
                         <div className="col-sm mt-4">
                             <SpinnerBootstrap />
                         </div>
                     }
                     </div>
+                    <ModalAddPeople personSelect={personSelect} />
                     <div className={'alert alert-success ' + myClass} role="alert">
                         <p>{message}</p>
                     </div>

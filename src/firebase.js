@@ -69,6 +69,23 @@ export function changePictureProfil(id, pictureName) {
   });
 }
 
+export function CreateUserFromCSV(data) {
+  return db.collection("famille").add({
+    deathDate: data[9],
+    firstName: data[7],
+    lastName: data[4],
+    generation: data[8],
+    birthDate: data[5],
+    numberFamilly: data[3],
+    pictureName: data[2],
+    PhotosHistory: firebase.firestore.FieldValue.arrayUnion(data[6]),
+    famillyName: data[1],
+    dateMariage: data[10],
+    email: data[11],
+    status: "à vérifié",
+  });
+}
+
 function ModifyUserFireBase(id, person, pictureName = "") {
   if (person.dateMariage === undefined) {
     person.dateMariage = "";
@@ -90,6 +107,74 @@ function ModifyUserFireBase(id, person, pictureName = "") {
       famillyName: person.famillyName,
       dateMariage: person.dateMariage,
       email: person.email,
+    });
+}
+
+export async function getEmailInOption() {
+  let userData = [];
+  return await db
+    .collection("emails")
+    .where("status", "==", "à vérifié")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        userData.push({
+          value: doc.data().adresseMail + "email:" + doc.id,
+          label: doc.data().adresseMail,
+        });
+      });
+      return userData;
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+export async function getUsersInOption() {
+  let userData = [];
+  return await db
+    .collection("famille")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        userData.push({
+          value: doc.id,
+          label: doc.data().firstName + " " + doc.data().lastName,
+        });
+      });
+      return userData;
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+export function changeStatus(id) {
+  return db.collection("emails").doc(id).update({
+    status: "vérifié",
+  });
+}
+
+export function addEmail(id, email) {
+  return db.collection("famille").doc(id).update({
+    email: email,
+  });
+}
+
+export async function getStatusEmail(email) {
+  let userData = [];
+  return await db
+    .collection("emails")
+    .where("adresseMail", "==", email)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        userData.push(doc.data());
+      });
+      return userData;
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
     });
 }
 
@@ -153,6 +238,7 @@ export function CreateUserFireBase(person, pictureName = "") {
     PhotosHistory: firebase.firestore.FieldValue.arrayUnion(pictureName),
     famillyName: person.famillyName,
     dateMariage: person.dateMariage,
+    email: "",
   });
 }
 
@@ -202,6 +288,13 @@ export function DeleteEvent(eventId) {
     .catch((error) => {
       console.log(error);
     });
+}
+
+export function AddEmailAddressWithCSV(data) {
+  return db.collection("emails").add({
+    adresseMail: data[0],
+    status: "à vérifié",
+  });
 }
 
 const Disconnect = () => {

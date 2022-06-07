@@ -24,6 +24,14 @@ const NavBarAdmin = () => {
                     {menuSelected === "admin/pictures" && <ion-icon name="images"></ion-icon>}
                     {menuSelected !== "admin/pictures" && <ion-icon name="images-outline"></ion-icon>}
                 </NavLink>
+                <NavLink onClick={() => changeMenuSelected("admin/emails")} className="navbar-brand" to="/admin/emails">
+                    {menuSelected === "admin/emails" && <ion-icon name="mail"></ion-icon>}
+                    {menuSelected !== "admin/emails" && <ion-icon name="mail-outline"></ion-icon>}
+                </NavLink>
+                <NavLink onClick={() => changeMenuSelected("admin/export")} className="navbar-brand" to="/admin/export">
+                    {menuSelected === "admin/export" && <ion-icon name="settings"></ion-icon>}
+                    {menuSelected !== "admin/export" && <ion-icon name="settings-outline"></ion-icon>}
+                </NavLink>
             </nav>
         </>
      );
