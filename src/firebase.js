@@ -249,7 +249,7 @@ export function UpdateEvent(data, id, pictureName) {
 }
 
 export function CreateUserFireBase(person, pictureName = "") {
-  return db.collection("test").add({
+  return db.collection("famille").add({
     firstName: person.firstName,
     lastName: person.lastName,
     generation: person.generation,

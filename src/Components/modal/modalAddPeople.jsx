@@ -4,9 +4,9 @@ import { CreateUserFireBase } from '../../firebase';
 
 
 const ModalAddPoeple = ({personSelect}) => {
-    let numberOfChildrens = MyFilter(personSelect.numberFamilly, personSelect.generation).filter((person) => person.generation === person.generation + 1).length;
-    let numberChildren = personSelect.numberFamilly*10 + numberOfChildrens +1;
     let generation = personSelect.generation*1 + 1;
+    let numberOfChildrens = MyFilter(personSelect.numberFamilly, personSelect.generation).filter((person) => person.generation === "" + generation).length;
+    let numberChildren = personSelect.numberFamilly*10 + numberOfChildrens +1;
     const [data, setData] = useState({famillyName: personSelect.famillyName, lastName : "", firstName: "", birthDate : "", numberFamilly : "" + numberChildren, generation : ""+generation, dateMariage: ""});
 
     const handleChange = (e) => {
@@ -20,6 +20,7 @@ const ModalAddPoeple = ({personSelect}) => {
     const handleChangeRadio = (e) => {
         let numberPartner = personSelect.numberFamilly*10;
         let numberOfChildrens = MyFilter(personSelect.numberFamilly, personSelect.generation).filter((person) => person.generation === person.generation + 1).length;
+        
         let numberChildren = personSelect.numberFamilly*10 + numberOfChildrens +1;
         let numberFamilly = parseInt(data.numberFamilly) === numberChildren ? numberPartner : numberChildren;
         let generation = parseInt(data.generation) === personSelect.generation*1 + 1 ? personSelect.generation : personSelect.generation*1 + 1;
