@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import NavBarAdmin from '../../Components/navBar/navBarAdmin';
 import SelectPerson from '../../Components/selectModifyPerson';
-import { addEmail, changeStatus, getEmailInOption, AddEmailAddressWithCSV } from '../../firebase';
+import { addEmail, changeStatus, getEmailInOption, AddEmailAddressWithCSV, deleteEmailFirebase } from '../../firebase';
 import { getUserData } from '../../Functions/cache';
 import Papa from "papaparse";
 import { AllDataInOptions } from '../../Functions/FilterData';
@@ -37,7 +37,7 @@ const AdminAddEmail = () => {
     }
 
     const attributeEmail = () => {
-        changeStatus(idEmail).then(() => {
+        changeStatus(idEmail, "vérifié").then(() => {
             addEmail(personSelected.id, personSelected.email).then(() => {
                 setMessage("Vos données ont bien été modifiées");
               })
@@ -45,6 +45,15 @@ const AdminAddEmail = () => {
                 setMessage("Error writing document: " + error);
               });
         })
+    }
+
+    const deleteEmail = () => {
+        deleteEmailFirebase(idEmail).then(() => {
+            setMessage("L'email a été supprimé")
+        })
+        .catch((error) => {
+            setMessage("Error writing document: " + error);
+          });
     }
 
     useEffect(() => {
@@ -57,7 +66,7 @@ const AdminAddEmail = () => {
         })
         setListUsers(AllDataInOptions());
         
-    }, []);
+    }, [message]);
     
 
     return ( 
@@ -73,6 +82,15 @@ const AdminAddEmail = () => {
                     <h1>Gestion des emails</h1>
                     <h3>Liste des adresses mails non validées</h3>
                     <SelectPerson data={listEmails} modifyPerson={selectEmail} />
+                    <div className='text-center'><button className='btn btn-danger mt-4' onClick={deleteEmail}>Supprimer email</button></div>
+                    <h3 className='mt-4'>Liste des personnes sans email</h3>
+                    <SelectPerson data={listUsers} modifyPerson={selectPerson} />
+
+                    <div className='text-center'><button className='btn btn-primary mt-4' onClick={attributeEmail}>Attribuer</button></div>
+                    <div className='alert alert-success mt-3' role="alert">
+                        <p>{message}</p>
+                    </div>
+
                     <h4>Ajouter des adresses mails</h4>
                     <input
                         type="file"
@@ -91,13 +109,6 @@ const AdminAddEmail = () => {
                         }
                         }}
                     />
-                    <h3 className='mt-4'>Liste des personnes sans email</h3>
-                    <SelectPerson data={listUsers} modifyPerson={selectPerson} />
-
-                    <div className='text-center'><button className='btn btn-primary mt-4' onClick={attributeEmail}>Attribuer</button></div>
-                    <div className='alert alert-success mt-3' role="alert">
-                        <p>{message}</p>
-                    </div>
                 </>
             }
         </>

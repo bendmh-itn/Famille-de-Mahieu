@@ -100,7 +100,7 @@ const Jeu2 = () => {
                     </div>
                 }
                 <h4 className='text-center'>Les choix possibles</h4>
-                <div className='containerFlexible'>
+                <div className='containerFlexible space-around'>
                     {parentsList.length !== 0 && parentsList.map((parent, index) => {
                         return (<div key={index}><img className='imageJeu2' src={parent.pictureName} alt='Parents selectionnés' onClick={() => CheckResponse(parent)} /></div>)
                     })}

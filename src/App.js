@@ -24,7 +24,11 @@ function App() {
 
   useEffect(() => {
     getStatusEmail(localStorage.getItem("email")).then((results) => {
-      setStatus(results[0]);
+      if (results !== undefined) {
+        setStatus(results[0]);
+      } else {
+        setStatus("not connected");
+      }
     });
   }, []);
   return (
@@ -68,18 +72,20 @@ function App() {
                 </div>
               </>
             )}
-            {status === undefined && (
+            {status && status === "not connected" && (
               <h4>
-                Votre adresse mail est en cours de vérification. Prévenez votre
-                administrateur
+                Vous n'êtes pas connecté. C'est un site familial, inutile de
+                vous connecter pour rien.
               </h4>
             )}
-            {status && status.status !== "vérifié" && (
-              <h4>
-                Votre adresse mail est en cours de vérification. Prévenez votre
-                administrateur
-              </h4>
-            )}
+            {status &&
+              status !== "not connected" &&
+              status.status !== "vérifié" && (
+                <h4>
+                  Votre adresse mail est en cours de vérification. Prévenez
+                  votre administrateur
+                </h4>
+              )}
           </main>
         </HashRouter>
       </UserProvider>

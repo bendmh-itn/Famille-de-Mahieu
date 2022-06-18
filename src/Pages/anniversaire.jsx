@@ -3,19 +3,12 @@ import TrombinoscopeFlex from '../Components/trombinoscopeFlex';
 import { MoisPersons, getData, copyData } from '../Functions/FilterData';
 import {ACTUAL_GENERATION} from "../constant";
 import fireBase from '../firebase';
-//import axios from 'axios';
 
 
 const Anniversaire = () => {
 	const [famillyFiltred, setFamillyFiltred] = useState([]);
     const [month, setMonth] = useState("");
     const [day, setDay] = useState("");
-    //const [messageSended, setMessageSended] = useState(false);
-
-    /*const sendMessage = (person) => {
-        const response = axios.get("https://test-service-6568.twil.io/sendSMS?firstname="+ person.firstName + "&lastname=" + person.lastName);
-        console.log(response);
-    }*/
 	
     useEffect(() => {
         const months = [
@@ -35,21 +28,6 @@ const Anniversaire = () => {
         let now = new Date();
         setMonth(months[now.getMonth()]);
         setDay(now.getDate());
-
-        /*const checkForBirthday = (data) => {
-            let send = false;
-            data.forEach(person => {
-                if(person.birthDate.split("/")[0] === (now.getDate().toString() < 10 ? "0" + now.getDate().toString() : now.getDate().toString())){
-                    if(!messageSended){
-                        sendMessage(person);
-                    }
-                    send = true;
-                }
-            });
-            if(send){
-                fireBase.ChangeMessageSended();
-            }
-        }*/
         let dataFinal;
         let dataStored = getData();
         if(dataStored.length === 0){
@@ -58,25 +36,10 @@ const Anniversaire = () => {
 				const data = querySnapshot.docs.map(doc => doc.data());
 				copyData(data);
                 dataFinal = MoisPersons();
-                /*
-                fireBase.MessageSended()
-                .then((doc) => {
-                    let messageSended = doc.data().send;
-                    setMessageSended(messageSended);
-                    console.log(messageSended);
-                    checkForBirthday(dataFinal);
-                })*/
                 setFamillyFiltred(dataFinal);
 			})
         }else{
             dataFinal = MoisPersons();
-            /*fireBase.MessageSended()
-            .then((doc) => {
-                let messageSended = doc.data().send;
-                setMessageSended(messageSended);
-                console.log(messageSended);
-                checkForBirthday(dataFinal);
-            })*/
             setFamillyFiltred(dataFinal);
         }
     }, []);
@@ -101,6 +64,16 @@ const Anniversaire = () => {
 				
 			)}
 			</div>
+            <div>
+                <h2>Sous forme d'agenda</h2>
+                <iframe
+                    title="Agenda des anniversaires"
+                    src="https://calendar.google.com/calendar/embed?src=family01141181756414071522%40group.calendar.google.com&ctz=Europe%2FBrussels"
+                    width="100%"
+                    height="500px"
+                    scrolling="no"
+                />
+            </div>
         </>
      );
 }

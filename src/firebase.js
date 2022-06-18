@@ -149,16 +149,37 @@ export async function getUsersInOption() {
     });
 }
 
-export function changeStatus(id) {
+export function changeStatus(id, message) {
   return db.collection("emails").doc(id).update({
-    status: "vérifié",
+    status: message,
   });
 }
 
-export function addEmail(id, email) {
-  return db.collection("famille").doc(id).update({
-    email: email,
-  });
+export async function deleteEmailFirebase(idEmail) {
+  return db
+    .collection("emails")
+    .doc(idEmail)
+    .delete()
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+}
+
+export async function addEmail(id, email) {
+  return db
+    .collection("famille")
+    .where("numberFamilly", "==", id.split("/")[1])
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        db.collection("famille").doc(doc.id).update({
+          email: email,
+        });
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
 }
 
 export async function getStatusEmail(email) {
@@ -248,15 +269,30 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const signInWithGoogle = () => {
-  auth
-    .signInWithPopup(provider)
-    .then((result) => {
-      const email = result.user.email;
-      localStorage.setItem("email", email);
-    })
-    .then(() => {
-      window.location.reload();
-    });
+  auth.signInWithPopup(provider).then((result) => {
+    const email = result.user.email;
+    db.collection("emails")
+      .where("adresseMail", "==", email)
+      .get()
+      .then((doc) => {
+        localStorage.setItem("email", email);
+        if (doc.empty) {
+          db.collection("emails")
+            .add({
+              adresseMail: email,
+              status: "à vérifié",
+            })
+            .then(() => {
+              window.location.reload();
+            });
+        } else {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  });
 };
 
 export const PutDataLocalStorage = async (email) => {
