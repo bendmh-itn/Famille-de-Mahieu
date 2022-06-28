@@ -208,7 +208,14 @@ const EventFlex = ({event, id=null, userId=null}) => {
                     }
                     {!id &&
                         <div>
-                            <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                            {
+                                event.value.visible === true &&
+                                    <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                            }
+                            {
+                                event.value.visible !== true && event.value.Created_By === userId &&
+                                    <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                            }
                             {event.value.Created_By === userId && 
                                 <div className='mb-3' >
                                     <button className='btn btn-danger' onClick={() => ConfirmDelete(event.id, "event")}>Supprimer</button>

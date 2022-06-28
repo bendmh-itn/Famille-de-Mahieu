@@ -234,6 +234,7 @@ export function CreateEvent(data, pictureName, userId) {
     PhotoEvent: pictureName,
     Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
     Created_By: userId,
+    visible: true,
   });
 }
 
