@@ -107,10 +107,10 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
     return ( 
         <>
             <div className='text-center'>
-                    <h4>{event.value.Titre}</h4>
-                    <h6>{moment.unix(event.value.Date.seconds).format("DD/MM/YYYY")}</h6>
                     {id && 
                         <div>
+                            <h4>{event.value.Titre}</h4>
+                            <h6>{moment.unix(event.value.Date.seconds).format("DD/MM/YYYY")}</h6>
                             <img src={event.value.PhotoEvent} alt={event.value.Titre} />
                             {
                                 userId && event.value.Created_By === userId &&
@@ -209,12 +209,20 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
                     {!id &&
                         <div>
                             {
-                                event.value.visible === true &&
-                                    <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                                event.value.visible === true && 
+                                    <>
+                                        <h4>{event.value.Titre}</h4>
+                                        <h6>{moment.unix(event.value.Date.seconds).format("DD/MM/YYYY")}</h6>
+                                        <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                                    </>
                             }
                             {
                                 event.value.visible !== true && (event.value.Created_By === userId || event.value.SharedWith.some(e => e.value === userData.numberFamilly[0])) &&
+                                <>
+                                    <h4>{event.value.Titre}</h4>
+                                    <h6>{moment.unix(event.value.Date.seconds).format("DD/MM/YYYY")}</h6>
                                     <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
+                                </>
                             }
                             {event.value.Created_By === userId && 
                                 <div className='mb-3' >
