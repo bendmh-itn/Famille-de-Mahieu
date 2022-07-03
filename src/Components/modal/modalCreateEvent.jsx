@@ -2,12 +2,23 @@ import React, { useState} from 'react';
 import Compressor from 'compressorjs';
 import { CreateEvent, storage } from '../../firebase';
 import SpinnerBootstrap from '../spinnerBootstrap';
+import Select from 'react-select';
 
 
 const ModalCreateEvent = ({userId}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const options = [
+        { value: '1', label: 'Famille Didier et Marie-Joëlle' },
+        { value: '2', label: 'Famille Baudouin et Sabine' },
+        { value: '3', label: 'Famille Guy et Vinciane' },
+        { value: '4', label: 'Famille Cédric et Pascale' },
+        { value: '5', label: 'Famille Louis et Charlotte' },
+        { value: '6', label: 'Famille Miguel et Brigitte' },
+        { value: '7', label: 'Famille Patrick et Anne' },
+        { value: '8', label: 'Famille Thierry et Carine' },
+        { value: '9', label: 'Patricia' },
+      ]
     const chooseTitle = (e) => {
         if(e!== null){
             const { name, value } = e.target;
@@ -24,6 +35,29 @@ const ModalCreateEvent = ({userId}) => {
             setData({
                 ...data,
                 [name]: value
+            });
+        }
+    }
+
+    const visibleOrNot = (e) => {
+        if(data['visible'] === undefined || data['visible'] === false){
+            setData({
+                ...data,
+                'visible': true
+            });
+        }else {
+            setData({
+                ...data,
+                'visible': false
+            });
+        }
+    }
+
+    const changeSelect = (e) => {
+        if(e!== null){
+            setData({
+                ...data,
+                'SharedWith': e
             });
         }
     }
@@ -108,6 +142,27 @@ const ModalCreateEvent = ({userId}) => {
                         <label className='mb-2'>Ajouter une image</label>
                         <input className="form-control" name='pictureName' type="file" onChange={handleCompressedUpload} />          
                     </div>
+                    <div>
+                        <p>Partie ci-dessous non modifiable pour l'instant</p>
+                    </div>
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input" name='visible' onChange={visibleOrNot} />
+                        <label className="form-check-label">Visible par tout le monde</label>
+                    </div>
+                    {
+                        (data['visible'] === false || data['visible'] === undefined) &&
+                        <>
+                        <label className="form-select-label">Visible par ... (laissez vide et ce sera privé pour vous)</label>
+                        <Select
+                            isMulti
+                            name="visibleBy"
+                            options={options}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                            onChange={changeSelect}
+                        />
+                        </>
+                    }
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

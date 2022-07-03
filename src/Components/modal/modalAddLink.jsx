@@ -32,7 +32,6 @@ const ModalAddLink = ({id, userId, index, picturesList}) => {
     }
 
     const updateData = () => {
-        console.log(id);
         picturesList[index].link = data.link
         picturesList[index].texte = data.title
         modifyPhotosInEvent(id, picturesList).then(() => {

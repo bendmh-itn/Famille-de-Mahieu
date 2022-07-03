@@ -11,7 +11,7 @@ import { modifyPhotosInEvent } from '../firebase';
 import ModalEditEvent from './modal/modalEditEvent';
 import ModalAddLink from './modal/modalAddLink';
 
-const EventFlex = ({event, id=null, userId=null}) => {
+const EventFlex = ({event, id=null, userId=null, userData=null}) => {
     const [pictures, setPictures] = useState([]);
     const history = useHistory();
     const [className, setClassName] = useState(false);
@@ -213,7 +213,7 @@ const EventFlex = ({event, id=null, userId=null}) => {
                                     <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
                             }
                             {
-                                event.value.visible !== true && event.value.Created_By === userId &&
+                                event.value.visible !== true && (event.value.Created_By === userId || event.value.SharedWith.some(e => e.value === userData.numberFamilly[0])) &&
                                     <button className="myButton mb-3" onClick={() => history.push("/event/" + event.id)}><img src={event.value.PhotoEvent} alt={event.value.Titre} /></button>
                             }
                             {event.value.Created_By === userId && 
