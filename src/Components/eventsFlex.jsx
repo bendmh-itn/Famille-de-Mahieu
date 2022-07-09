@@ -18,6 +18,7 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
     const [loading, setLoading] = useState(false);
     const [index, setIndex] = useState(-1);
     const [upload, setUpload] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleCompressedUpload = (e) => {
         const images = e.target.files;
@@ -60,7 +61,7 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
                 "state_changed",
                 snapshot => {},
                 error => {
-                    console.log(error);
+                    setErrorMessage(error);
                 },
                 () => {
                     storage
@@ -68,12 +69,16 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
                         .child(picture.name)
                         .getDownloadURL()
                         .then(pictureName => {
-                            AddElementInPhoto(id, pictureName, userId, data).then(() => {
+                            AddElementInPhoto(id, pictureName, userId, data)
+                            .then(() => {
                                 counter--;
                                 if(counter <= 0){
                                     window.location.reload(false);
                                 }
-                            });
+                            })
+                            .catch((error) => {
+                                setErrorMessage(error);
+                              });
                         });
                 }
             )
@@ -153,6 +158,12 @@ const EventFlex = ({event, id=null, userId=null, userData=null}) => {
                                     loading && 
                                     <div className="col-sm mt-4">
                                         <SpinnerBootstrap />
+                                    </div>
+                                }
+                                {
+                                    errorMessage !== "" &&
+                                    <div>
+                                        <p>{errorMessage}</p>
                                     </div>
                                 }
                             </div>
