@@ -234,7 +234,7 @@ export function CreateEvent(data, pictureName, userId) {
     PhotoEvent: pictureName,
     Date: firebase.firestore.Timestamp.fromDate(new Date(data.date)),
     Created_By: userId,
-    visible: data.Visible === undefined ? false : data.visible,
+    visible: data.visible === undefined ? false : data.visible,
     SharedWith: data.SharedWith === undefined ? [] : data.SharedWith,
   });
 }
