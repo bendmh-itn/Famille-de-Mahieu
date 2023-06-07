@@ -9,6 +9,7 @@ firebase-tools-instant-win.exe
 .firebaserc
 firebase.json
 git.txt
+firebase-debug.log
 
 # testing
 /coverage
