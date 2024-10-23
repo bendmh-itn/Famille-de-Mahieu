@@ -9,12 +9,6 @@ var firebaseApp;
 
 if (!firebase.apps.length) {
   firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyB3JOdtAfXGRs5ob9KztShnK3OCY-m4oiU",
-    authDomain: "demahieu-file.firebaseapp.com",
-    projectId: "demahieu-file",
-    storageBucket: "demahieu-file.appspot.com",
-    messagingSenderId: "192092843689",
-    appId: "1:192092843689:web:d490269a5a93671c3483b8",
   });
 } else {
   firebaseApp = firebase.app(); // if already initialized, use that one
